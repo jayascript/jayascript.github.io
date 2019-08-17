@@ -7,9 +7,9 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-  <title>JayaScript | 
+  <title>Contact | JayaScript
 </title>
-  <link rel="canonical" href="/index.html">
+  <link rel="canonical" href="/pages/contact.html">
 
 
 
@@ -19,6 +19,7 @@
   <link rel="stylesheet" href="/theme/css/style.css">
 
 
+<meta name="description" content="Get in touch! var contactform = document.getElementById('contactform'); contactform.setAttribute('action', '//formspree.io/' + 'jayascript' + '@' + 'pm' + '.' + 'me');">
 </head>
 
 <body>
@@ -48,9 +49,31 @@
 
   <div class="main">
     <div class="container">
-      <h1>Articles
+      <h1>Contact
 </h1>
       <hr>
+<article class="article">
+  <div class="content">
+    
+    Get in touch!
+
+    <form id="contactform" method="post">
+      <input type="text" name="name" placeholder="Name" required>
+      <input type="email" name="_replyto" placeholder="Email Address" required>
+      <input type="hidden" name="_subject" value="Contact Request: jayascript.io" />
+      <textarea name="message" placeholder="Message" rows="8" cols="80"></textarea>
+      <input type="text" name="_gotcha" style="display:none" />
+      <input type="submit" value="Send">
+    </form>
+
+    <script type="text/javascript">
+      var contactform = document.getElementById('contactform');
+      contactform.setAttribute('action', '//formspree.io/' + 'jayascript' + '@' + 'pm' + '.' + 'me');
+    </script>
+
+  
+  </div>
+</article>
     </div>
   </div>
 
