@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="/theme/css/fontawesome.min.css">
   <link rel="stylesheet" href="/theme/css/pygments/default.min.css">
   <link rel="stylesheet" href="/theme/css/theme.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Raleway:wght@200&display=swap">
 
   
   <meta name="description" content="An analysis of Twitter reactions to the Teen Wolf S05E16 premiere.">
@@ -26,23 +27,37 @@
   <header class="header">
     <div class="container">
 <div class="row">
-    <div class="col-sm-4">
+
+    <div class="col-sm-1 siteimagediv">
       <a href="/">
-        <img class="img-fluid rounded" src=/images/jaya-pic.png alt="JayaScript">
+        <img class="img-fluid rounded-circle" id="siteimage" src=/images/data.png alt="JayaScript">
       </a>
     </div>
-  <div class="col-sm-8">
+
+  <div class="col-sm-7">
     <h1 class="title"><a href="/">JayaScript</a></h1>
+    <p class="text-muted" id="sitesubtitle">🐧 Linux 🐍 Python 💻 Developer 📉 Analytics</p>
+  </div>
+
+    <div class="col-sm-4 link_box">
       <ul class="list-inline">
-          <li class="list-inline-item"><a href="https://realpython.com/team/jayazhane/" target="_blank">Real Python</a></li>
+        <li class="list-inline-item"><a href=""><i class="fa fa-home"></i></a></li>
+        <li class="list-inline-item"><a href="/categories.html"><i class="fa fa-code"></i></a></li>
+        <li class="list-inline-item"><a href="/pages/about.html"><i class="fa fa-user-circle"></i></a></li>
+        <li class="list-inline-item"><a href="/pages/contact.html"><i class="fa fa-envelope"></i></a></li>
+          <li class="list-inline-item"><a class="fab fa-github" href="https://github.com/jayascript/" target="_blank"></a></li>
+          <li class="list-inline-item"><a class="fab fa-twitter" href="https://twitter.com/jayascript" target="_blank"></a></li>
+        <!--           <li class="list-inline-item"><a href="/" target="_blank">Home</a></li>
+          <li class="list-inline-item"><a href="/categories.html" target="_blank">Categories</a></li>
+
               <li class="list-inline-item text-muted">|</li>
             <li class="list-inline-item"><a href="/pages/about.html">About</a></li>
             <li class="list-inline-item"><a href="/pages/contact.html">Contact</a></li>
-            <li class=" list-inline-item text-muted">|</li>
-          <li class="list-inline-item"><a class="fab fa-github" href="https://github.com/jayascript/" target="_blank"></a></li>
-          <li class="list-inline-item"><a class="fab fa-twitter" href="https://twitter.com/jayascript" target="_blank"></a></li>
+         -->
       </ul>
+
   </div>
+
 </div>    </div>
   </header>
 
@@ -54,19 +69,24 @@
   <article class="article">
     <header>
       <ul class="list-inline">
-        <li class="list-inline-item text-muted" title="2016-05-01T00:00:00-04:00">
-          <i class="fas fa-clock"></i>
-          Sun 01 May 2016
+        <li class="list-inline-item text-muted">
+          <i class="fas fa-calendar" aria-hidden="true"></i>
+          2016-05-01
         </li>
-        <li class="list-inline-item">
-          <i class="fas fa-folder-open"></i>
+        <li class="list-inline-item text-muted">
+          <i class="fas fa-folder-open" aria-hidden="true"></i>
           <a href="/category/projects.html">Projects</a>
         </li>
-          <li class="list-inline-item">
+          <li class="list-inline-item text-muted">
             <i class="fas fa-tag"></i>
               <a href="/tag/data-analysis.html">#data analysis</a>,               <a href="/tag/python.html">#python</a>,               <a href="/tag/sql.html">#sql</a>,               <a href="/tag/tableau.html">#tableau</a>,               <a href="/tag/twitter.html">#twitter</a>          </li>
       </ul>
     </header>
+    <p align="center">
+        <picture>
+          <img id="cover" width="100%" src="/images/articles/stydia-rising/Stydia Premiere hashtags limit 1.png" alt="Stydia Rising">
+        </picture>
+    </p>
     <div class="content">
       <h1>An Analysis of Twitter Reactions to the Teen Wolf S05E16 Premiere</h1>
 <p>This is my first data analysis project, completed in partial fulfillment of the requirements for the University of Michigan's Python Specialization program on Coursera.</p>
@@ -84,11 +104,11 @@
 <li><a href="#discussion">Discussion</a><ul>
 <li><a href="#debug">Debug</a></li>
 <li><a href="#directions">Directions</a></li>
-<li><a href="#disseminate">Disseminate</a></li>
 </ul>
 </li>
+<li><a href="#disseminate">Disseminate</a></li>
 </ul>
-<h2>Description</h2>
+<h2><a id="description"></a>Description</h2>
 <p>I analyzed 80,000+ tweets tagged #TeenWolf and 34,000+ tweets tagged #Stydia. "Stydia" is the blended couple name of Stiles and Lydia, two characters on the MTV drama Teen Wolf. Many fans of the show "ship" these two couples; short for "relationship," to "ship" someone means to hope that they will officially get together on the show.</p>
 <p>In the "Lie Ability" (S05E16) episode of Teen Wolf, Stiles and Lydia share a moment together that could very well indicate them becoming an official couple at some time in the future. During the show, Stiles attempts to rescue Lydia, who encourages him to leave her since what he's trying to do is dangerous. Stiles tells Lydia to "please shut up and let [him] save [her] life." Fans refer to this kind of moment as the point when their ship "rises," i.e. gains legitimacy. Thus, this project is an analysis of the moment when "Stydia" started "rising."</p>
 <p>I was curious to see how Twitter reacted during that moment on Teen Wolf. Would there be a spike in tweets similar to the moment when the Broncos won the Super Bowl? Here are a few other questions I wanted to answer:</p>
@@ -100,15 +120,15 @@
 <li>Does the pattern of reaction repeat over several hours across the U.S. as the show airs in each respective timezone?</li>
 <li>What was the overall sentiment during the episode?</li>
 </ul>
-<h2>Data</h2>
-<h3>Discovery</h3>
+<h2><a id="data"></a>Data</h2>
+<h3><a id="discovery"></a>Discovery</h3>
 <p>Before I started my project, I needed to <strong>make sure that the data was even available</strong> for collection. This is something that has slowed me down with previous projects. I started this project in March 2016, and the episode in question occurred at 9:00 PM EST on February 9, 2016.</p>
 <p>I immediately his a roadblock. Twitter's API will only allow you to get tweets from no more than 7 days in the past. The tweets I wanted had occurred over a month before. At this point, <strong>I was very tempted to give up.</strong> I can't get the data, so I can't do the project, right?</p>
 <p>Still, this was something I <em>really</em> wanted to look into, so I kept searching for a solution. Eventually I found one: <a href="https://github.com/Jefferson-Henrique/GetOldTweets-python/">a Python project</a> that bypassed Twitter's API and used a browser search to pull past tweets.</p>
 <p>Unfortunately, I hit a second roadblock when I realized that this program <strong>wasn't doing exactly what I needed.</strong> I wanted to cull tens of thousands of tweets, and it was taking me an unnecessarily long time to do it. I realized that his program was storing all of the tweets in a list and then retrieving them one by one; this was a terrible burden on my computer's memory that caused it to stall out more often than not.</p>
 <p>I had to sit down and go the program to figure out where this was happening, and then I had to <strong>figure out how to insert my own code</strong> into it to get the program to do what I needed it to do.</p>
 <p>Finally I was able to get the program to write the tweets out to an SQLite3 database in real time. In this way I culled 80,000+ tweets for the #TeenWolf hashtag over the course of 6 days, and 34,000+ tweets for the #Stydia hashtag over the same period of time.</p>
-<h3>Download</h3>
+<h3><a id="download"></a>Download</h3>
 <p>The coding portion of the project consisted of creating scripts to pull the tweets and write them to a database. Once I started the analysis, I create a few more scripts to help clean the data up and pull out the most important tweets.</p>
 <p>Below is the code I added to the GetOldTweets program <code>TweetManager.py</code> file to write the tweets to a database:</p>
 <div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">getTweets</span><span class="p">(</span><span class="n">tweetCriteria</span><span class="p">):</span>
@@ -205,7 +225,7 @@
   </p>
 </p>
 
-<h3>Dissection</h3>
+<h3><a id="dissection"></a>Dissection</h3>
 <p>As I'm still currently taking machine learning courses, I'm not yet at the point where I feel comfortable performing sentiment analysis on the data. As such, those questions (whether a tweet is pro- or anti-Stydia, what the overall sentiment during the episode premiere was) will have to be saved for future research endeavors.</p>
 <p>However, I was able to answer most of my original questions, as well as some other questions that I developed during the analysis.</p>
 <p>Following in the footsteps of the <a href="http://blog.aylien.com/post/140037240328/super-bowl-50-according-to-twitter-sentiment">Super Bowl 50 Analysis</a>, I used Tableau to visualize my results.</p>
@@ -428,23 +448,23 @@
   </p>
 </p>
 
-<h2>Discussion</h2>
+<h2><a id="discussion"></a>Discussion</h2>
 <p>I managed to answer most of my pressing questions. I successfully visualized Twitter data for my favorite show during one of the most influential episodes for Stydia shippers. I was able to make a contribution to my fandom and I am very proud of myself for that. I also learned how to use a new tool (Tableau) with which I felt quite uncomfortable at first, but with more practice I quickly got the hang of it.</p>
 <p>Overall I am very happy with this project and consider it a great success!</p>
-<h3>Debug</h3>
+<h3><a id="debug"></a>Debug</h3>
 <ol>
 <li><strong>It took entirely too long to get the GOT program working.</strong> I spent way more time than necessary trying to pull the tweets. The very first thing I should have done when using somebody else's program is go through and read the code to see what it does. GOT has very little documentation so this should have been even more pressing. Next time I'll be sure to keep this in mind.</li>
 <li><strong>I did not calculate how much RAM I would need to run the program.</strong> When I was first working with the GOT model I kept getting disk I/O errors and my laptop kept stalling out. Of course once I got the tweets to write out to a DB in real time this wasn't an issue, but I think it's important to learn how to calculate RAM and such for when I will need it in the future.</li>
 <li><strong>The project needed more organization.</strong> Of course at the beginning I could not imagine the number of tweets I would get; the scope of the project evaded me at that time. While I did have separate directories for the code, the data, the documentation and the output, I could have done a better job keeping in its place. I ended up with a lot of files in the end, and a consistent naming scheme, for example, could have saved me a lot of confusion. I also may have benefited from using version control this time around. That is something I look forward to working more with in future projects.</li>
 <li><strong>The project needed clearer definition.</strong> All I knew was that I wanted to get tweets and I wanted to look at them at one point in time. I didn't specify at the beginning how many tweets I wanted to collected, the date and time I wanted them to be from, and what exactly I wanted to do with them. I ended up collecting more data than I needed (which is not necessarily a bad thing), and writing extra scripts towards the end of the analysis to do things I hadn't thought of before. While this is to be expected, next time I look forward to created a solid project plan so that I can know more clearly what I want to do with my data before I get it.</li>
 </ol>
-<h3>Directions</h3>
+<h3><a id="directions"></a>Directions</h3>
 <ol>
 <li><strong>Perform sentiment analysis on the dataset.</strong> This is something that I got from the Super Bowl 50 analysis that I wanted to try for myself. What was the overall sentiment during the S05E16 episode? Did it change over time? Can we tell if a tweet is pro- or anti-Stydia? Fandom has interesting ways of representing positive sentiment (for example, the phrase "STYDIA VINES HURT SO MUCH" should actually be interpreted positively), so I wonder how current text analytics tools would work on fandom-derived data.</li>
 <li><strong>Consolidate the scripts into a seamless program.</strong> This wasn't something I set out to do, but I think it could be helpful. I know that lots of programs exist already to perform Twitter analysis, but I might like to challenge myself by creating a version of my own.</li>
 <li><strong>Issue a pull request to the GOT model.</strong> I found it very helpful to be able to write the tweets out to a database in real time instead of reading them all into memory. I know that there are others out there who may also need to pull tens of thousands of tweets that were written in the past. I hope to adapt my code to a general usage and issue a pull request to the GOT model on GitHub so that others can benefit from this as well.</li>
 </ol>
-<h2>Disseminate</h2>
+<h2><a id="disseminate"></a>Disseminate</h2>
 <ul>
 <li><a href="http://blog.aylien.com/post/140037240328/super-bowl-50-according-to-twitter-sentiment">Aylien's Super Bowl 50 Analysis</a></li>
 <li><a href="https://public.tableau.com/s/">Tableau Public Visualization Tool</a></li>
@@ -463,10 +483,14 @@
     <li class="list-inline-item"><a href="/archives.html">Archives</a></li>
     <li class="list-inline-item"><a href="/categories.html">Categories</a></li>
       <li class="list-inline-item"><a href="/tags.html">Tags</a></li>
+      <li class="list-inline-item text-muted">|</li>
+        <li class="list-inline-item"><a class="fab fa-github" href="https://github.com/jayascript/" target="_blank"></a></li>
+        <li class="list-inline-item"><a class="fab fa-twitter" href="https://twitter.com/jayascript" target="_blank"></a></li>
   </ul>
+
   <p class="col-sm-6 text-sm-right text-muted">
     Generated by <a href="https://github.com/getpelican/pelican" target="_blank">Pelican</a>
-    / <a href="https://github.com/nairobilug/pelican-alchemy" target="_blank">&#x2728;</a>
+    / <a href="https://github.com/nairobilug/pelican-alchemy" target="_blank">&#x2728;</a> © 2020 Jaya Z. Powell.
   </p>
 </div>    </div>
   </footer>

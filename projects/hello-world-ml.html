@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>  Hello World of Machine Learning! | JayaScript
+</title>
+  <link rel="canonical" href="/projects/hello-world-ml.html">
+
+
+  <link rel="stylesheet" href="/theme/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/theme/css/fontawesome.min.css">
+  <link rel="stylesheet" href="/theme/css/pygments/default.min.css">
+  <link rel="stylesheet" href="/theme/css/theme.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Raleway:wght@200&display=swap">
+
+  
+  <meta name="description" content="Determining the best ML algorithm to predict the iris flowers dataset.">
+
+
+</head>
+
+<body>
+  <header class="header">
+    <div class="container">
+<div class="row">
+
+    <div class="col-sm-1 siteimagediv">
+      <a href="/">
+        <img class="img-fluid rounded-circle" id="siteimage" src=/images/data.png alt="JayaScript">
+      </a>
+    </div>
+
+  <div class="col-sm-7">
+    <h1 class="title"><a href="/">JayaScript</a></h1>
+    <p class="text-muted" id="sitesubtitle">🐧 Linux 🐍 Python 💻 Developer 📉 Analytics</p>
+  </div>
+
+    <div class="col-sm-4 link_box">
+      <ul class="list-inline">
+        <li class="list-inline-item"><a href=""><i class="fa fa-home"></i></a></li>
+        <li class="list-inline-item"><a href="/categories.html"><i class="fa fa-code"></i></a></li>
+        <li class="list-inline-item"><a href="/pages/about.html"><i class="fa fa-user-circle"></i></a></li>
+        <li class="list-inline-item"><a href="/pages/contact.html"><i class="fa fa-envelope"></i></a></li>
+          <li class="list-inline-item"><a class="fab fa-github" href="https://github.com/jayascript/" target="_blank"></a></li>
+          <li class="list-inline-item"><a class="fab fa-twitter" href="https://twitter.com/jayascript" target="_blank"></a></li>
+        <!--           <li class="list-inline-item"><a href="/" target="_blank">Home</a></li>
+          <li class="list-inline-item"><a href="/categories.html" target="_blank">Categories</a></li>
+
+              <li class="list-inline-item text-muted">|</li>
+            <li class="list-inline-item"><a href="/pages/about.html">About</a></li>
+            <li class="list-inline-item"><a href="/pages/contact.html">Contact</a></li>
+         -->
+      </ul>
+
+  </div>
+
+</div>    </div>
+  </header>
+
+  <div class="main">
+    <div class="container">
+      <h1>  Hello World of Machine Learning!
+</h1>
+      <hr>
+  <article class="article">
+    <header>
+      <ul class="list-inline">
+        <li class="list-inline-item text-muted">
+          <i class="fas fa-calendar" aria-hidden="true"></i>
+          2018-04-26
+        </li>
+        <li class="list-inline-item text-muted">
+          <i class="fas fa-folder-open" aria-hidden="true"></i>
+          <a href="/category/projects.html">Projects</a>
+        </li>
+          <li class="list-inline-item text-muted">
+            <i class="fas fa-tag"></i>
+              <a href="/tag/machine-learning.html">#machine learning</a>,               <a href="/tag/python.html">#python</a>,               <a href="/tag/stats.html">#stats</a>,               <a href="/tag/dataviz.html">#dataviz</a>          </li>
+      </ul>
+    </header>
+    <p align="center">
+        <picture>
+          <img id="cover" width="100%" src="/images/articles/hello-world-ml/hwml_007.png" alt="Hello World of Machine Learning!">
+        </picture>
+    </p>
+    <div class="content">
+      <h1>Determining the Best ML Algorithm to Predict the Iris Flowers Dataset</h1>
+<p>This is my first machine learning project, completed end-to-end using <a href="https://machinelearningmastery.com/machine-learning-in-python-step-by-step/">this tutorial</a> from Machine Learning Mastery. The project was a way for me to get out of my head and into the practical world of machine learning; namely, instead of taking more and more courses and reading more and more books, this was a way for me to finally get out and try some of those things I'd been learning for myself.</p>
+<h2>Directory</h2>
+<p>Click the section you would like to jump to:</p>
+<ul>
+<li><a href="#description">Description</a></li>
+<li><a href="#data">Data</a><ul>
+<li><a href="#discovery">Discovery</a> <sub><em>Data sources.</em></sub></li>
+<li><a href="#download">Download</a> <sub><em>Collection process.</em></sub></li>
+<li><a href="#dissection">Dissection</a> <sub><em>Data analysis.</em></sub></li>
+</ul>
+</li>
+<li><a href="#deploy">Deploy</a><ul>
+<li><a href="#division">Division</a> <sub><em>Separate the data.</em></sub></li>
+<li><a href="#decision">Decision</a> <sub><em>Choose the best model.</em></sub></li>
+<li><a href="#divination">Divination</a> <sub><em>Make predictions.</em></sub></li>
+</ul>
+</li>
+<li><a href="#discussion">Discussion</a><ul>
+<li><a href="#debug">Debug</a> <sub><em>Mistakes were made.</em></sub></li>
+<li><a href="#directions">Directions</a> <sub><em>Ideas for future research.</em></sub></li>
+</ul>
+</li>
+<li><a href="#disseminate">Disseminate</a></li>
+</ul>
+<h2><a id="description"></a>Description</h2>
+<p>I used Python and its built-in machine learning capabilities to work through the <a href="https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data">iris flowers dataset</a>. The project was stepped-through with the help of a tutorial on <a href="https://machinelearningmastery.com/machine-learning-in-python-step-by-step/">Machine Learning Mastery</a>.</p>
+<p>I was curious to see if I could implement a full-blown machine learning project on my own, using just what I'd learned so far through the courses I'd taken previously. During the course of the project, I also came up with a question I wanted to answer:</p>
+<ul>
+<li>Are the KNN and CART algorithms equally accurate at making predictions?</li>
+</ul>
+<h2><a id="data"></a>Data</h2>
+<h3><a id="discovery"></a>Discovery</h3>
+<p>The Iris flower dataset is <a href="https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data">readily available</a>.</p>
+<h3><a id="download"></a>Download</h3>
+<p>The dataset was loaded directly into the console using the following code:</p>
+<div class="highlight"><pre><span></span><span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data&quot;</span>
+<span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;sepal-length&#39;</span><span class="p">,</span> <span class="s1">&#39;sepal-width&#39;</span><span class="p">,</span> <span class="s1">&#39;petal-length&#39;</span><span class="p">,</span> <span class="s1">&#39;petal-width&#39;</span><span class="p">,</span> <span class="s1">&#39;class&#39;</span><span class="p">]</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pandas</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="n">names</span><span class="p">)</span>
+</pre></div>
+
+
+<h3><a id="dissection"></a>Dissection</h3>
+<p>I used various means to visualize our data and get a better understanding of it.</p>
+<h4>Dimensions</h4>
+<p>First, we determined what the data itself looked like. How many <strong>rows (instances/examples)</strong> and <strong>columns (features or attributes)</strong> are there? I used <code>dataset.shape</code> and found 150 rows corresponding to 150 flowers in the dataset.</p>
+<p>There were also 5 columns. From what I knew of machine learning (and the way I had loaded the data previously), I could guess more accurately that 4 of them were <strong>features</strong> and the fifth column was the <strong>class</strong> of each flower, belonging to one of three possible classes.</p>
+<h4>First Look</h4>
+<p>After getting the size of the dataset, I used <code>dataset.head</code> to take a look at the actual data itself.</p>
+<p>This was where I learned that the data was zero-indexed, with the first example numbered <code>0</code> and the last one numbered <code>149</code>. This was different from what I’d learned up to this point in Octave, where everything was indexed from 1. Regardless, from taking this quick look I could already see two of the flower classes: <code>Iris setosa</code> and <code>Iris virginica</code>. I wondered what the last one was!</p>
+<h4>Stats</h4>
+<p>I used <code>dataset.describe</code> to look at the descriptive statistics for the four features:</p>
+<p align="center">
+  <img src="/images/articles/hello-world-ml/hwml_002.jpg" alt="iris flower descriptive statistics" width="100%" height="" style="">
+  <p style="text-align:center;"><sup><em></em></sup>
+  </p>
+</p>
+
+<p>There were indeed 150 examples, and the output showed the mean, standard deviation, max and min for each feature.</p>
+<p>Dr. Brownlee also noted that all features have a similar scale and range. I remembered from Andrew Ng's course that it's important to note the scale of your features in case you need to normalize the data.</p>
+<h4>Class Distribution</h4>
+<p>I discovered how many examples were in each class by using <code>dataset.groupby('class').size()</code>. From this we could see that the third class was <code>Iris-versicolor</code>. There were exactly 50 flowers in each class.</p>
+<h4>Visualization</h4>
+<p>After I'd gotten a good grasp of the data, it was time to visualize it to get an even better understanding of what I was working with.</p>
+<p>This step helped me to determine if there were any relationships between the data that could be predicted in the first place.</p>
+<p align="center">
+  <img src="/images/articles/hello-world-ml/hwml_003.jpg" alt="iris flower box plot code" width="100%" height="" style="">
+  <p style="text-align:center;"><sup><em>Code used to generate a box plot.</em></sup>
+  </p>
+</p>
+
+<p align="center">
+  <img src="/images/articles/hello-world-ml/hwml_004.png" alt="iris flower box plots" width="100%" height="" style="">
+  <p style="text-align:center;"><sup><em>Iris flower boxplots.</em></sup>
+  </p>
+</p>
+
+<p>I much prefer histograms, so that's what I visualized next:</p>
+<p align="center">
+  <img src="/images/articles/hello-world-ml/hwml_005.jpg" alt="iris flower histogram code" width="100%" height="" style="">
+  <p style="text-align:center;"><sup><em>Code used to generate histograms.</em></sup>
+  </p>
+</p>
+
+<p align="center">
+  <img src="/images/articles/hello-world-ml/hwml_006.png" alt="iris flower histograms" width="100%" height="" style="">
+  <p style="text-align:center;"><sup><em>Iris flower histograms. Dr. Brownlee notes that two of the attributes (namely sepal-length and sepal-width) appear to follow the normal distribution, and that we’ll be able to “exploit this assumption” through our algorithms.</em></sup>
+  </p>
+</p>
+
+<p align="center">
+  <img src="/images/articles/hello-world-ml/hwml_007.png" alt="iris flower scatterplots" width="100%" height="" style="">
+  <p style="text-align:center;"><sup><em>Scatterplots pairing all possible features. I noted quite a few linear correlations, most notably between sepal-length/petal-length, petal-width/petal-length, petal-length/sepal-length and petal-length/petal-width.</em></sup>
+  </p>
+</p>
+
+<p>Dr. Brownlee corroborated my finding: noting “the diagonal grouping of some pairs of attributes.” This meant they were highly correlated, and we could possibly predict these relationships very well using machine learning!</p>
+<h2><a id="deploy"></a>Deploy</h2>
+<h3><a id="division"></a>Division</h3>
+<p>In <a href="https://www.coursera.org/learn/machine-learning">Andrew Ng's course</a>, I learned to always split the data into <strong>training/validation/test sets</strong>, with a minimum train/test split.</p>
+<p>I’m going to follow this tutorial and do an <strong>80-20 train/test set</strong>, but I look forwarding to trying the 3-fold split in the future. After running the provided code, data is split into <code>X_train</code>, <code>Y_train</code>, <code>X_validation</code> and <code>Y_validation</code>.</p>
+<h3><a id="decision"></a>Decision</h3>
+<blockquote>
+<p>We don’t know which algorithms would be good on this problem or what configurations to use. We get an idea from the plots that some of the classes are partially linearly separable in some dimensions, so we are expecting generally good results.</p>
+</blockquote>
+<p>We needed to evaluate lots of different learning algorithms to see which one would give us the best chance of predictions. We looked at the following six:</p>
+<ol>
+<li>Logistic Regression</li>
+<li>Linear Discriminant Analysis</li>
+<li>K-Nearest Neighbors</li>
+<li>Classification and Regression Trees</li>
+<li>Gaussian Naïve Bayes</li>
+<li>Support Vector Machines</li>
+</ol>
+<p>I learned about most of these through Andrew Ng’s course, and the rest through the <a href="http://ocdevel.com/podcasts/machine-learning/">Machine Learning Guide podcast</a>. I was excited to finally try them out!</p>
+<p>The code to build and evaluate these algorithms are deceptively simple. When I took Andrew Ng's course, I had to build them all from scratch. There were pages upon pages of code, all inter-related to one another, and if I messed something up in one document it would wreak havoc in another. This is so easy! As Python is known for, just plug-and-play ;)</p>
+<p align="center">
+  <img src="/images/articles/hello-world-ml/hwml_008.jpg" alt="model evaluation" width="100%" height="" style="">
+  <p style="text-align:center;"><sup><em>Model evaluation.</em></sup>
+  </p>
+</p>
+
+<p>From Dr. Brownlee’s article, KNN was the best model by far, but my evaluation puts KNN at the same accuracy as CART. He said you could also plot the evaluation results, which might help differentiate the two. So I tried that next:</p>
+<p align="center">
+  <img src="/images/articles/hello-world-ml/hwml_009.png" alt="second model evaluation" width="100%" height="" style="">
+  <p style="text-align:center;"><sup><em>Second model evaluation.</em></sup>
+  </p>
+</p>
+
+<p>...It didn't help much. Apparently all of the models do pretty well on this dataset. So I followed the tutorial and went with KNN.</p>
+<h3><a id="divination"></a>Divination</h3>
+<h4>KNN</h4>
+<blockquote>
+<p>We can run the KNN model directly on the validation set and summarize the results as a final accuracy score, a confusion matrix and a classification report.</p>
+</blockquote>
+<p>After copying his code, this is what I got:</p>
+<p align="center">
+  <img src="/images/articles/hello-world-ml/hwml_010.jpg" alt="knn prediction accuracy" width="100%" height="" style="">
+  <p style="text-align:center;"><sup><em>KNN prediction accuracy.</em></sup>
+  </p>
+</p>
+
+<p>Same as the tutorial! An accuracy of 90% for KNN.</p>
+<h4>Breakaway: CART</h4>
+<p>So I got that CART is about the same accuracy as KNN. I'll admit, I wasn't satisfied with simply following the tutorial and stopping here. So I went ahead and tried to run the same code with a decision tree to see if I could get similar predictions:</p>
+<p align="center">
+  <img src="/images/articles/hello-world-ml/hwml_011.jpg" alt="Decision tree prediction accuracy" width="100%" height="" style="">
+  <p style="text-align:center;"><sup><em>Decision tree prediction accuracy.</em></sup>
+  </p>
+</p>
+
+<p>This was not what I had expected at all! Since they'd received a similar score on the evaluation metric, I had assumed the decision tree would perform just as well as—or perhaps even better than—KNN. It appears that the decision tree algorithm actually <em>does</em> perform worse than KNN, with an accuracy of only 87%. So it seems that, for the iris flowers dataset, KNN is the algorithm that gives the best predictions.</p>
+<h2><a id="discussion"></a>Discussion</h2>
+<p>I was nervous to start this project. I thought that doing an ML project from end-to-end meant sitting down and writing everything out first:</p>
+<ul>
+<li><em>What is the problem I want to solve?</em></li>
+<li><em>Where can I get the data?</em></li>
+<li><em>What algorithms am I going to use?...</em></li>
+</ul>
+<p>I never thought I could just hack a problem together in an hour or so to get the basics down. But that’s exactly what I did here. Hopefully, I will be more aggressive about getting my hands dirty and actually playing around with what I can do in the future.</p>
+<p>I was also excited that I came up with a problem and was able to answer it on my own! I saw that KNN and CART seemed to get the same accuracy score on the model evaluation, and I was able to adapt the code provided by the tutorial to check that out for myself. Very proud moment!</p>
+<h3><a id="debug"></a>Debug</h3>
+<ol>
+<li><strong>I tried to print descriptive summary statistics using <code>describe</code>.</strong> I forgot to put closing parentheses, like in <code>dataset.describe()</code>. That fixed it right up.</li>
+<li><strong>Several times I tried to type new code into the console will a figure was still open.</strong> Every time I got confused as to why nothing was showing up. Hopefully in the future I’ll be able to remember to close those figures first when I'm ready to move on.</li>
+<li><strong>I had trouble implementing a for-loop in the console.</strong> I always have to struggle through it until I get all the returns and indents right. But once I get the indents right I can figure it out just fine.</li>
+</ol>
+<h3><a id="directions"></a>Directions</h3>
+<ol>
+<li><strong>Deepen my knowledge:</strong> The tutorial said we needed to "reset the random number seed before each run to ensure that the evaluation of each algorithm is performed using exactly the same data splits...[ensuring that] the results are directly comparable." I didn't quite understand why we needed to do this. Learn what "seed" is and what it’s used for, as well as what the test harness is.</li>
+<li><strong>Gain a bit more independence:</strong> While I'm proud of myself and what I was able to accomplish in less than an hour this morning, I'd feel more confident knowing that I could construct these shell scripts on my own. To this end, work on small projects or tutorials that will help me understand how to write code on my own, especially for visualizing data.</li>
+</ol>
+<h2><a id="disseminate"></a>Disseminate</h2>
+<ul>
+<li><a href="https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data">Iris Flowers Dataset</a></li>
+<li><a href="https://machinelearningmastery.com/machine-learning-in-python-step-by-step/">Machine Learning Mastery Tutorial</a></li>
+<li><a href="https://www.coursera.org/learn/machine-learning">Andrew Ng's Machine Learning Course</a></li>
+<li><a href="http://ocdevel.com/podcasts/machine-learning/">Machine Learning Guide Podcast</a></li>
+</ul>
+    </div>
+  </article>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+<div class="row">
+  <ul class="col-sm-6 list-inline">
+    <li class="list-inline-item"><a href="/archives.html">Archives</a></li>
+    <li class="list-inline-item"><a href="/categories.html">Categories</a></li>
+      <li class="list-inline-item"><a href="/tags.html">Tags</a></li>
+      <li class="list-inline-item text-muted">|</li>
+        <li class="list-inline-item"><a class="fab fa-github" href="https://github.com/jayascript/" target="_blank"></a></li>
+        <li class="list-inline-item"><a class="fab fa-twitter" href="https://twitter.com/jayascript" target="_blank"></a></li>
+  </ul>
+
+  <p class="col-sm-6 text-sm-right text-muted">
+    Generated by <a href="https://github.com/getpelican/pelican" target="_blank">Pelican</a>
+    / <a href="https://github.com/nairobilug/pelican-alchemy" target="_blank">&#x2728;</a> © 2020 Jaya Z. Powell.
+  </p>
+</div>    </div>
+  </footer>
+
+</body>
+
+</html>
