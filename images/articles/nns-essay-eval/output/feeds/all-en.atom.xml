@@ -1,0 +1,610 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>A Pelican Blog</title><link href="/" rel="alternate"></link><link href="/feeds/all-en.atom.xml" rel="self"></link><id>/</id><updated>2020-06-20T00:00:00+00:00</updated><entry><title>Hello World of Machine Learning!</title><link href="/projects/hello-world-ml.html" rel="alternate"></link><published>2018-04-26T00:00:00+00:00</published><updated>2020-06-20T00:00:00+00:00</updated><author><name></name></author><id>tag:None,2018-04-26:/projects/hello-world-ml.html</id><summary type="html">&lt;p&gt;Determining the best ML algorithm to predict the iris flowers dataset.&lt;/p&gt;</summary><content type="html">&lt;h1&gt;Determining the Best ML Algorithm to Predict the Iris Flowers Dataset&lt;/h1&gt;
+&lt;p&gt;This is my first machine learning project, completed end-to-end using &lt;a href="https://machinelearningmastery.com/machine-learning-in-python-step-by-step/"&gt;this tutorial&lt;/a&gt; from Machine Learning Mastery. The project was a way for me to get out of my head and into the practical world of machine learning; namely, instead of taking more and more courses and reading more and more books, this was a way for me to finally get out and try some of those things I'd been learning for myself.&lt;/p&gt;
+&lt;h2&gt;Directory&lt;/h2&gt;
+&lt;p&gt;Click the section you would like to jump to:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="#description"&gt;Description&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#data"&gt;Data&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href="#discovery"&gt;Discovery&lt;/a&gt; &lt;sub&gt;&lt;em&gt;Data sources.&lt;/em&gt;&lt;/sub&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#download"&gt;Download&lt;/a&gt; &lt;sub&gt;&lt;em&gt;Collection process.&lt;/em&gt;&lt;/sub&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#dissection"&gt;Dissection&lt;/a&gt; &lt;sub&gt;&lt;em&gt;Data analysis.&lt;/em&gt;&lt;/sub&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href="#deploy"&gt;Deploy&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href="#division"&gt;Division&lt;/a&gt; &lt;sub&gt;&lt;em&gt;Separate the data.&lt;/em&gt;&lt;/sub&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#decision"&gt;Decision&lt;/a&gt; &lt;sub&gt;&lt;em&gt;Choose the best model.&lt;/em&gt;&lt;/sub&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#divination"&gt;Divination&lt;/a&gt; &lt;sub&gt;&lt;em&gt;Make predictions.&lt;/em&gt;&lt;/sub&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href="#discussion"&gt;Discussion&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href="#debug"&gt;Debug&lt;/a&gt; &lt;sub&gt;&lt;em&gt;Mistakes were made.&lt;/em&gt;&lt;/sub&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#directions"&gt;Directions&lt;/a&gt; &lt;sub&gt;&lt;em&gt;Ideas for future research.&lt;/em&gt;&lt;/sub&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href="#disseminate"&gt;Disseminate&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;&lt;a id="description"&gt;&lt;/a&gt;Description&lt;/h2&gt;
+&lt;p&gt;I used Python and its built-in machine learning capabilities to work through the &lt;a href="https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data"&gt;iris flowers dataset&lt;/a&gt;. The project was stepped-through with the help of a tutorial on &lt;a href="https://machinelearningmastery.com/machine-learning-in-python-step-by-step/"&gt;Machine Learning Mastery&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;I was curious to see if I could implement a full-blown machine learning project on my own, using just what I'd learned so far through the courses I'd taken previously. During the course of the project, I also came up with a question I wanted to answer:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Are the KNN and CART algorithms equally accurate at making predictions?&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;&lt;a id="data"&gt;&lt;/a&gt;Data&lt;/h2&gt;
+&lt;h3&gt;&lt;a id="discovery"&gt;&lt;/a&gt;Discovery&lt;/h3&gt;
+&lt;p&gt;The Iris flower dataset is &lt;a href="https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data"&gt;readily available&lt;/a&gt;.&lt;/p&gt;
+&lt;h3&gt;&lt;a id="download"&gt;&lt;/a&gt;Download&lt;/h3&gt;
+&lt;p&gt;The dataset was loaded directly into the console using the following code:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;url&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data&amp;quot;&lt;/span&gt;
+&lt;span class="n"&gt;names&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;sepal-length&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;sepal-width&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;petal-length&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;petal-width&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;class&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;span class="n"&gt;dataset&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;pandas&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;read_csv&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;url&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;names&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;names&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;&lt;a id="dissection"&gt;&lt;/a&gt;Dissection&lt;/h3&gt;
+&lt;p&gt;I used various means to visualize our data and get a better understanding of it.&lt;/p&gt;
+&lt;h4&gt;Dimensions&lt;/h4&gt;
+&lt;p&gt;First, we determined what the data itself looked like. How many &lt;strong&gt;rows (instances/examples)&lt;/strong&gt; and &lt;strong&gt;columns (features or attributes)&lt;/strong&gt; are there? I used &lt;code&gt;dataset.shape&lt;/code&gt; and found 150 rows corresponding to 150 flowers in the dataset.&lt;/p&gt;
+&lt;p&gt;There were also 5 columns. From what I knew of machine learning (and the way I had loaded the data previously), I could guess more accurately that 4 of them were &lt;strong&gt;features&lt;/strong&gt; and the fifth column was the &lt;strong&gt;class&lt;/strong&gt; of each flower, belonging to one of three possible classes.&lt;/p&gt;
+&lt;h4&gt;First Look&lt;/h4&gt;
+&lt;p&gt;After getting the size of the dataset, I used &lt;code&gt;dataset.head&lt;/code&gt; to take a look at the actual data itself.&lt;/p&gt;
+&lt;p&gt;This was where I learned that the data was zero-indexed, with the first example numbered &lt;code&gt;0&lt;/code&gt; and the last one numbered &lt;code&gt;149&lt;/code&gt;. This was different from what I’d learned up to this point in Octave, where everything was indexed from 1. Regardless, from taking this quick look I could already see two of the flower classes: &lt;code&gt;Iris setosa&lt;/code&gt; and &lt;code&gt;Iris virginica&lt;/code&gt;. I wondered what the last one was!&lt;/p&gt;
+&lt;h4&gt;Stats&lt;/h4&gt;
+&lt;p&gt;I used &lt;code&gt;dataset.describe&lt;/code&gt; to look at the descriptive statistics for the four features:&lt;/p&gt;
+&lt;p align="center"&gt;
+  &lt;img src="/images/articles/hello-world-ml/hwml_002.jpg" alt="iris flower descriptive statistics" width="100%" height="" style=""&gt;
+  &lt;p style="text-align:center;"&gt;&lt;sup&gt;&lt;em&gt;&lt;/em&gt;&lt;/sup&gt;
+  &lt;/p&gt;
+&lt;/p&gt;
+
+&lt;p&gt;There were indeed 150 examples, and the output showed the mean, standard deviation, max and min for each feature.&lt;/p&gt;
+&lt;p&gt;Dr. Brownlee also noted that all features have a similar scale and range. I remembered from Andrew Ng's course that it's important to note the scale of your features in case you need to normalize the data.&lt;/p&gt;
+&lt;h4&gt;Class Distribution&lt;/h4&gt;
+&lt;p&gt;I discovered how many examples were in each class by using &lt;code&gt;dataset.groupby('class').size()&lt;/code&gt;. From this we could see that the third class was &lt;code&gt;Iris-versicolor&lt;/code&gt;. There were exactly 50 flowers in each class.&lt;/p&gt;
+&lt;h4&gt;Visualization&lt;/h4&gt;
+&lt;p&gt;After I'd gotten a good grasp of the data, it was time to visualize it to get an even better understanding of what I was working with.&lt;/p&gt;
+&lt;p&gt;This step helped me to determine if there were any relationships between the data that could be predicted in the first place.&lt;/p&gt;
+&lt;p align="center"&gt;
+  &lt;img src="/images/articles/hello-world-ml/hwml_003.jpg" alt="iris flower box plot code" width="100%" height="" style=""&gt;
+  &lt;p style="text-align:center;"&gt;&lt;sup&gt;&lt;em&gt;Code used to generate a box plot.&lt;/em&gt;&lt;/sup&gt;
+  &lt;/p&gt;
+&lt;/p&gt;
+
+&lt;p align="center"&gt;
+  &lt;img src="/images/articles/hello-world-ml/hwml_004.png" alt="iris flower box plots" width="100%" height="" style=""&gt;
+  &lt;p style="text-align:center;"&gt;&lt;sup&gt;&lt;em&gt;Iris flower boxplots.&lt;/em&gt;&lt;/sup&gt;
+  &lt;/p&gt;
+&lt;/p&gt;
+
+&lt;p&gt;I much prefer histograms, so that's what I visualized next:&lt;/p&gt;
+&lt;p align="center"&gt;
+  &lt;img src="/images/articles/hello-world-ml/hwml_005.jpg" alt="iris flower histogram code" width="100%" height="" style=""&gt;
+  &lt;p style="text-align:center;"&gt;&lt;sup&gt;&lt;em&gt;Code used to generate histograms.&lt;/em&gt;&lt;/sup&gt;
+  &lt;/p&gt;
+&lt;/p&gt;
+
+&lt;p align="center"&gt;
+  &lt;img src="/images/articles/hello-world-ml/hwml_006.png" alt="iris flower histograms" width="100%" height="" style=""&gt;
+  &lt;p style="text-align:center;"&gt;&lt;sup&gt;&lt;em&gt;Iris flower histograms. Dr. Brownlee notes that two of the attributes (namely sepal-length and sepal-width) appear to follow the normal distribution, and that we’ll be able to “exploit this assumption” through our algorithms.&lt;/em&gt;&lt;/sup&gt;
+  &lt;/p&gt;
+&lt;/p&gt;
+
+&lt;p align="center"&gt;
+  &lt;img src="/images/articles/hello-world-ml/hwml_007.png" alt="iris flower scatterplots" width="100%" height="" style=""&gt;
+  &lt;p style="text-align:center;"&gt;&lt;sup&gt;&lt;em&gt;Scatterplots pairing all possible features. I noted quite a few linear correlations, most notably between sepal-length/petal-length, petal-width/petal-length, petal-length/sepal-length and petal-length/petal-width.&lt;/em&gt;&lt;/sup&gt;
+  &lt;/p&gt;
+&lt;/p&gt;
+
+&lt;p&gt;Dr. Brownlee corroborated my finding: noting “the diagonal grouping of some pairs of attributes.” This meant they were highly correlated, and we could possibly predict these relationships very well using machine learning!&lt;/p&gt;
+&lt;h2&gt;&lt;a id="deploy"&gt;&lt;/a&gt;Deploy&lt;/h2&gt;
+&lt;h3&gt;&lt;a id="division"&gt;&lt;/a&gt;Division&lt;/h3&gt;
+&lt;p&gt;In &lt;a href="https://www.coursera.org/learn/machine-learning"&gt;Andrew Ng's course&lt;/a&gt;, I learned to always split the data into &lt;strong&gt;training/validation/test sets&lt;/strong&gt;, with a minimum train/test split.&lt;/p&gt;
+&lt;p&gt;I’m going to follow this tutorial and do an &lt;strong&gt;80-20 train/test set&lt;/strong&gt;, but I look forwarding to trying the 3-fold split in the future. After running the provided code, data is split into &lt;code&gt;X_train&lt;/code&gt;, &lt;code&gt;Y_train&lt;/code&gt;, &lt;code&gt;X_validation&lt;/code&gt; and &lt;code&gt;Y_validation&lt;/code&gt;.&lt;/p&gt;
+&lt;h3&gt;&lt;a id="decision"&gt;&lt;/a&gt;Decision&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;We don’t know which algorithms would be good on this problem or what configurations to use. We get an idea from the plots that some of the classes are partially linearly separable in some dimensions, so we are expecting generally good results.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;We needed to evaluate lots of different learning algorithms to see which one would give us the best chance of predictions. We looked at the following six:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Logistic Regression&lt;/li&gt;
+&lt;li&gt;Linear Discriminant Analysis&lt;/li&gt;
+&lt;li&gt;K-Nearest Neighbors&lt;/li&gt;
+&lt;li&gt;Classification and Regression Trees&lt;/li&gt;
+&lt;li&gt;Gaussian Naïve Bayes&lt;/li&gt;
+&lt;li&gt;Support Vector Machines&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;I learned about most of these through Andrew Ng’s course, and the rest through the &lt;a href="http://ocdevel.com/podcasts/machine-learning/"&gt;Machine Learning Guide podcast&lt;/a&gt;. I was excited to finally try them out!&lt;/p&gt;
+&lt;p&gt;The code to build and evaluate these algorithms are deceptively simple. When I took Andrew Ng's course, I had to build them all from scratch. There were pages upon pages of code, all inter-related to one another, and if I messed something up in one document it would wreak havoc in another. This is so easy! As Python is known for, just plug-and-play ;)&lt;/p&gt;
+&lt;p align="center"&gt;
+  &lt;img src="/images/articles/hello-world-ml/hwml_008.jpg" alt="model evaluation" width="100%" height="" style=""&gt;
+  &lt;p style="text-align:center;"&gt;&lt;sup&gt;&lt;em&gt;Model evaluation.&lt;/em&gt;&lt;/sup&gt;
+  &lt;/p&gt;
+&lt;/p&gt;
+
+&lt;p&gt;From Dr. Brownlee’s article, KNN was the best model by far, but my evaluation puts KNN at the same accuracy as CART. He said you could also plot the evaluation results, which might help differentiate the two. So I tried that next:&lt;/p&gt;
+&lt;p align="center"&gt;
+  &lt;img src="/images/articles/hello-world-ml/hwml_009.png" alt="second model evaluation" width="100%" height="" style=""&gt;
+  &lt;p style="text-align:center;"&gt;&lt;sup&gt;&lt;em&gt;Second model evaluation.&lt;/em&gt;&lt;/sup&gt;
+  &lt;/p&gt;
+&lt;/p&gt;
+
+&lt;p&gt;...It didn't help much. Apparently all of the models do pretty well on this dataset. So I followed the tutorial and went with KNN.&lt;/p&gt;
+&lt;h3&gt;&lt;a id="divination"&gt;&lt;/a&gt;Divination&lt;/h3&gt;
+&lt;h4&gt;KNN&lt;/h4&gt;
+&lt;blockquote&gt;
+&lt;p&gt;We can run the KNN model directly on the validation set and summarize the results as a final accuracy score, a confusion matrix and a classification report.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;After copying his code, this is what I got:&lt;/p&gt;
+&lt;p align="center"&gt;
+  &lt;img src="/images/articles/hello-world-ml/hwml_010.jpg" alt="knn prediction accuracy" width="100%" height="" style=""&gt;
+  &lt;p style="text-align:center;"&gt;&lt;sup&gt;&lt;em&gt;KNN prediction accuracy.&lt;/em&gt;&lt;/sup&gt;
+  &lt;/p&gt;
+&lt;/p&gt;
+
+&lt;p&gt;Same as the tutorial! An accuracy of 90% for KNN.&lt;/p&gt;
+&lt;h4&gt;Breakaway: CART&lt;/h4&gt;
+&lt;p&gt;So I got that CART is about the same accuracy as KNN. I'll admit, I wasn't satisfied with simply following the tutorial and stopping here. So I went ahead and tried to run the same code with a decision tree to see if I could get similar predictions:&lt;/p&gt;
+&lt;p align="center"&gt;
+  &lt;img src="/images/articles/hello-world-ml/hwml_011.jpg" alt="Decision tree prediction accuracy" width="100%" height="" style=""&gt;
+  &lt;p style="text-align:center;"&gt;&lt;sup&gt;&lt;em&gt;Decision tree prediction accuracy.&lt;/em&gt;&lt;/sup&gt;
+  &lt;/p&gt;
+&lt;/p&gt;
+
+&lt;p&gt;This was not what I had expected at all! Since they'd received a similar score on the evaluation metric, I had assumed the decision tree would perform just as well as—or perhaps even better than—KNN. It appears that the decision tree algorithm actually &lt;em&gt;does&lt;/em&gt; perform worse than KNN, with an accuracy of only 87%. So it seems that, for the iris flowers dataset, KNN is the algorithm that gives the best predictions.&lt;/p&gt;
+&lt;h2&gt;&lt;a id="discussion"&gt;&lt;/a&gt;Discussion&lt;/h2&gt;
+&lt;p&gt;I was nervous to start this project. I thought that doing an ML project from end-to-end meant sitting down and writing everything out first:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;What is the problem I want to solve?&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Where can I get the data?&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;What algorithms am I going to use?...&lt;/em&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;I never thought I could just hack a problem together in an hour or so to get the basics down. But that’s exactly what I did here. Hopefully, I will be more aggressive about getting my hands dirty and actually playing around with what I can do in the future.&lt;/p&gt;
+&lt;p&gt;I was also excited that I came up with a problem and was able to answer it on my own! I saw that KNN and CART seemed to get the same accuracy score on the model evaluation, and I was able to adapt the code provided by the tutorial to check that out for myself. Very proud moment!&lt;/p&gt;
+&lt;h3&gt;&lt;a id="debug"&gt;&lt;/a&gt;Debug&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;I tried to print descriptive summary statistics using &lt;code&gt;describe&lt;/code&gt;.&lt;/strong&gt; I forgot to put closing parentheses, like in &lt;code&gt;dataset.describe()&lt;/code&gt;. That fixed it right up.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Several times I tried to type new code into the console will a figure was still open.&lt;/strong&gt; Every time I got confused as to why nothing was showing up. Hopefully in the future I’ll be able to remember to close those figures first when I'm ready to move on.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;I had trouble implementing a for-loop in the console.&lt;/strong&gt; I always have to struggle through it until I get all the returns and indents right. But once I get the indents right I can figure it out just fine.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3&gt;&lt;a id="directions"&gt;&lt;/a&gt;Directions&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Deepen my knowledge:&lt;/strong&gt; The tutorial said we needed to "reset the random number seed before each run to ensure that the evaluation of each algorithm is performed using exactly the same data splits...[ensuring that] the results are directly comparable." I didn't quite understand why we needed to do this. Learn what "seed" is and what it’s used for, as well as what the test harness is.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Gain a bit more independence:&lt;/strong&gt; While I'm proud of myself and what I was able to accomplish in less than an hour this morning, I'd feel more confident knowing that I could construct these shell scripts on my own. To this end, work on small projects or tutorials that will help me understand how to write code on my own, especially for visualizing data.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2&gt;&lt;a id="disseminate"&gt;&lt;/a&gt;Disseminate&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data"&gt;Iris Flowers Dataset&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://machinelearningmastery.com/machine-learning-in-python-step-by-step/"&gt;Machine Learning Mastery Tutorial&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.coursera.org/learn/machine-learning"&gt;Andrew Ng's Machine Learning Course&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://ocdevel.com/podcasts/machine-learning/"&gt;Machine Learning Guide Podcast&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><category term="machine learning"></category><category term="python"></category><category term="statistics"></category><category term="dataviz"></category></entry><entry><title>Non-Native Speaker Essay Evaluation</title><link href="/projects/nns-essay-eval.html" rel="alternate"></link><published>2018-02-27T00:00:00+00:00</published><updated>2020-06-20T00:00:00+00:00</updated><author><name></name></author><id>tag:None,2018-02-27:/projects/nns-essay-eval.html</id><summary type="html">&lt;p&gt;An analysis of essay grading by native and non-native Japanese speakers.&lt;/p&gt;</summary><content type="html">&lt;h1&gt;An Analysis of Essay Grading By Native and Non-Native Japanese Speakers&lt;/h1&gt;
+&lt;p&gt;This statistical analysis exercise was completed in partial fulfillment of the requirements for the course Research Statistics I. I audited this graduate-level course while on a research scholarship at Sophia University in Tokyo, Japan. The instructor, &lt;a href="http://rscdb.cc.sophia.ac.jp/Profiles/65/0006461/prof_e.html"&gt;Prof. Yoshinori Watanabe&lt;/a&gt;, researches language testing and assessment.&lt;/p&gt;
+&lt;p&gt;The project was the first major stats exercise I completed after taking Basic Statistics through the University of Amsterdam on Coursera. It was so exciting to see everything I’d learned in class applied to a real-life situation!&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="#description"&gt;Description&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#data"&gt;Data&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href="#download"&gt;Download&lt;/a&gt; &lt;sub&gt;&lt;em&gt;Data sources and collection process.&lt;/em&gt;&lt;/sub&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#dissection"&gt;Dissection&lt;/a&gt; &lt;sub&gt;&lt;em&gt;Data analysis.&lt;/em&gt;&lt;/sub&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href="#discussion"&gt;Discussion&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href="#debug"&gt;Debug&lt;/a&gt; &lt;sub&gt;&lt;em&gt;Mistakes were made.&lt;/em&gt;&lt;/sub&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#directions"&gt;Directions&lt;/a&gt; &lt;sub&gt;&lt;em&gt;Ideas for future research.&lt;/em&gt;&lt;/sub&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href="#disseminate"&gt;Disseminate&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;&lt;a id="description"&gt;&lt;/a&gt;Description&lt;/h2&gt;
+&lt;p&gt;In this exercise, we examined an essay written in the Japanese language by a non-native speaker of Japanese. The essay was scored by 14 native speakers of Japanese, as well as 14 non-native speakers of Japanese. These graders evaluated the essay on three categories:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Content&lt;/li&gt;
+&lt;li&gt;Organization&lt;/li&gt;
+&lt;li&gt;Grammar&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Scores were provided on a scale of 0 to 10.&lt;/p&gt;
+&lt;p&gt;The purpose of this exercise was to determine whether there was a difference in the average evaluation score between the two groups.&lt;/p&gt;
+&lt;h2&gt;&lt;a id="data"&gt;&lt;/a&gt;Data&lt;/h2&gt;
+&lt;h2&gt;&lt;a id="download"&gt;&lt;/a&gt;Download&lt;/h2&gt;
+&lt;p&gt;The essay and scores were provided by Professor Watanabe. The files were downloaded from a USB drive, and the stats were computed on a personal computer.&lt;/p&gt;
+&lt;p align="center"&gt;
+  &lt;img src="/images/articles/nns-essay-eval/ns-nns-scores.jpg" alt="graders" width="100%" height="" style=""&gt;
+  &lt;p style="text-align:center;"&gt;&lt;sup&gt;&lt;em&gt;Group 1 is Non-Native Speakers (NNS), Group 2 is Native Speakers (NS). Both groups of graders evaluated a single essay on content, organization and grammar.&lt;/em&gt;&lt;/sup&gt;
+  &lt;/p&gt;
+&lt;/p&gt;
+
+&lt;h2&gt;&lt;a id="dissection"&gt;&lt;/a&gt;Dissection&lt;/h2&gt;
+&lt;p&gt;We loaded the Excel data into SPSS and used the software to calculate statistics and perform a t-test. We found that &lt;strong&gt;non-native speakers (NNS, Group 1)&lt;/strong&gt; had a higher standard deviation (SD = 2.31) on the total score allotted to the essay. &lt;strong&gt;Native speakers (NS, Group 2)&lt;/strong&gt; were much more consistent with their interpretation of the essay (SD = 1.7).&lt;/p&gt;
+&lt;p align="center"&gt;
+  &lt;img src="/images/articles/nns-essay-eval/ns-nns-descriptives.jpg" alt="" width="100%" height="" style=""&gt;
+  &lt;p style="text-align:center;"&gt;&lt;sup&gt;&lt;em&gt;Descriptive statistics computed for all 28 graders.&lt;/em&gt;&lt;/sup&gt;
+  &lt;/p&gt;
+&lt;/p&gt;
+
+&lt;p&gt;There were 28 graders in total. The average scores given on the essay (rounded up) were 8.4 for content, 7.3 for organization, 6.2 for grammar, and 21.9 total.&lt;/p&gt;
+&lt;p align="center"&gt;
+  &lt;img src="/images/articles/nns-essay-eval/ns-nns-groups-stats.jpg" alt="group statistics" width="100%" height="" style=""&gt;
+  &lt;p style="text-align:center;"&gt;&lt;sup&gt;&lt;em&gt;Statistics computed on each category by group (NNS vs NS).&lt;/em&gt;&lt;/sup&gt;
+  &lt;/p&gt;
+&lt;/p&gt;</content><category term="statistics"></category><category term="excel"></category><category term="spss"></category><category term="data analysis"></category></entry><entry><title>Stydia Rising</title><link href="/projects/stydia-rising.html" rel="alternate"></link><published>2016-05-01T00:00:00+00:00</published><updated>2020-06-19T00:00:00+00:00</updated><author><name></name></author><id>tag:None,2016-05-01:/projects/stydia-rising.html</id><summary type="html">&lt;p&gt;An analysis of Twitter reactions to the Teen Wolf S05E16 premiere.&lt;/p&gt;</summary><content type="html">&lt;h1&gt;An Analysis of Twitter Reactions to the Teen Wolf S05E16 Premiere&lt;/h1&gt;
+&lt;p&gt;This is my first data analysis project, completed in partial fulfillment of the requirements for the University of Michigan's Python Specialization program on Coursera.&lt;/p&gt;
+&lt;p&gt;The project is a spin-off of a Super Bowl 50 Twitter analysis that I came across while doing some research. I was particularly excited at the way they correlated the winning moment in the game to the spike in tweets that occurred at the same time. I wanted to adapt their project to my own domain: a favorite TV show of mine that had recently experienced a similar elation-inducing moment.&lt;/p&gt;
+&lt;h2&gt;Directory&lt;/h2&gt;
+&lt;p&gt;Click the section you would like to jump to:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="#description"&gt;Description&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#data"&gt;Data&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href="#discovery"&gt;Discovery&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#download"&gt;Download&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#dissection"&gt;Dissection&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href="#discussion"&gt;Discussion&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href="#debug"&gt;Debug&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#directions"&gt;Directions&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href="#disseminate"&gt;Disseminate&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;&lt;a id="description"&gt;&lt;/a&gt;Description&lt;/h2&gt;
+&lt;p&gt;I analyzed 80,000+ tweets tagged #TeenWolf and 34,000+ tweets tagged #Stydia. "Stydia" is the blended couple name of Stiles and Lydia, two characters on the MTV drama Teen Wolf. Many fans of the show "ship" these two couples; short for "relationship," to "ship" someone means to hope that they will officially get together on the show.&lt;/p&gt;
+&lt;p&gt;In the "Lie Ability" (S05E16) episode of Teen Wolf, Stiles and Lydia share a moment together that could very well indicate them becoming an official couple at some time in the future. During the show, Stiles attempts to rescue Lydia, who encourages him to leave her since what he's trying to do is dangerous. Stiles tells Lydia to "please shut up and let [him] save [her] life." Fans refer to this kind of moment as the point when their ship "rises," i.e. gains legitimacy. Thus, this project is an analysis of the moment when "Stydia" started "rising."&lt;/p&gt;
+&lt;p&gt;I was curious to see how Twitter reacted during that moment on Teen Wolf. Would there be a spike in tweets similar to the moment when the Broncos won the Super Bowl? Here are a few other questions I wanted to answer:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Can we classify a tweet as pro-Stydia or the reverse?&lt;/li&gt;
+&lt;li&gt;Can we see an increase in tweets at the point where Stydia rises?&lt;/li&gt;
+&lt;li&gt;What were the trending hashtags throughout the week?&lt;/li&gt;
+&lt;li&gt;What hashtags were most frequently used along with #TeenWolf?&lt;/li&gt;
+&lt;li&gt;Does the pattern of reaction repeat over several hours across the U.S. as the show airs in each respective timezone?&lt;/li&gt;
+&lt;li&gt;What was the overall sentiment during the episode?&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;&lt;a id="data"&gt;&lt;/a&gt;Data&lt;/h2&gt;
+&lt;h3&gt;&lt;a id="discovery"&gt;&lt;/a&gt;Discovery&lt;/h3&gt;
+&lt;p&gt;Before I started my project, I needed to &lt;strong&gt;make sure that the data was even available&lt;/strong&gt; for collection. This is something that has slowed me down with previous projects. I started this project in March 2016, and the episode in question occurred at 9:00 PM EST on February 9, 2016.&lt;/p&gt;
+&lt;p&gt;I immediately his a roadblock. Twitter's API will only allow you to get tweets from no more than 7 days in the past. The tweets I wanted had occurred over a month before. At this point, &lt;strong&gt;I was very tempted to give up.&lt;/strong&gt; I can't get the data, so I can't do the project, right?&lt;/p&gt;
+&lt;p&gt;Still, this was something I &lt;em&gt;really&lt;/em&gt; wanted to look into, so I kept searching for a solution. Eventually I found one: &lt;a href="https://github.com/Jefferson-Henrique/GetOldTweets-python/"&gt;a Python project&lt;/a&gt; that bypassed Twitter's API and used a browser search to pull past tweets.&lt;/p&gt;
+&lt;p&gt;Unfortunately, I hit a second roadblock when I realized that this program &lt;strong&gt;wasn't doing exactly what I needed.&lt;/strong&gt; I wanted to cull tens of thousands of tweets, and it was taking me an unnecessarily long time to do it. I realized that his program was storing all of the tweets in a list and then retrieving them one by one; this was a terrible burden on my computer's memory that caused it to stall out more often than not.&lt;/p&gt;
+&lt;p&gt;I had to sit down and go the program to figure out where this was happening, and then I had to &lt;strong&gt;figure out how to insert my own code&lt;/strong&gt; into it to get the program to do what I needed it to do.&lt;/p&gt;
+&lt;p&gt;Finally I was able to get the program to write the tweets out to an SQLite3 database in real time. In this way I culled 80,000+ tweets for the #TeenWolf hashtag over the course of 6 days, and 34,000+ tweets for the #Stydia hashtag over the same period of time.&lt;/p&gt;
+&lt;h3&gt;&lt;a id="download"&gt;&lt;/a&gt;Download&lt;/h3&gt;
+&lt;p&gt;The coding portion of the project consisted of creating scripts to pull the tweets and write them to a database. Once I started the analysis, I create a few more scripts to help clean the data up and pull out the most important tweets.&lt;/p&gt;
+&lt;p&gt;Below is the code I added to the GetOldTweets program &lt;code&gt;TweetManager.py&lt;/code&gt; file to write the tweets to a database:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;getTweets&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;tweetCriteria&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+  &lt;span class="n"&gt;refreshCursor&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;&amp;#39;&lt;/span&gt;
+  &lt;span class="c1"&gt;# tweetDB = raw_input(&amp;quot;Please enter database name: &amp;quot;)&lt;/span&gt;
+  &lt;span class="n"&gt;connect&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;sqlite3&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;connect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Stydia_Tweets.sqlite&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="n"&gt;cur&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;connect&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;cursor&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+  &lt;span class="n"&gt;count&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;
+
+  &lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="bp"&gt;True&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="n"&gt;cur&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;execute&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&amp;#39;&amp;#39;&lt;/span&gt;
+&lt;span class="s1"&gt;      INSERT OR IGNORE INTO Tweets (&lt;/span&gt;
+&lt;span class="s1"&gt;        tweet_id, tweet_user, tweet_text, tweet_date, tweet_hash, tweet_RTs,&lt;/span&gt;
+&lt;span class="s1"&gt;        tweet_faves, tweet_ment, tweet_loc, tweet_link&lt;/span&gt;
+&lt;span class="s1"&gt;      ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )&amp;#39;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;
+        &lt;span class="n"&gt;tweet&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;id&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;tweet&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;username&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;tweet&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;text&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;tweet&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;date&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;tweet&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;hashtags&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="n"&gt;tweet&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;retweets&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;tweet&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;favorites&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;tweet&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;mentions&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;tweet&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;geo&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="n"&gt;tweet&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;permalink&lt;/span&gt;
+      &lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;connect&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;commit&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+    &lt;span class="o"&gt;...&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;I connected my script to the file, using it as a go-between from the program to the database.&lt;/p&gt;
+&lt;p&gt;My script is below:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Project: Stydia Rising&amp;quot;&lt;/span&gt;
+&lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Object: Collect tweets.&amp;quot;&lt;/span&gt;
+
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;sys&lt;/span&gt;
+&lt;span class="c1"&gt;# Appends the GetOldTweets manager so that I can import it&lt;/span&gt;
+&lt;span class="n"&gt;sys&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;C:\Users\jzp93\GetOldTweets-python-master&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;got&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;sqlite3&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;datetime&lt;/span&gt;
+
+&lt;span class="c1"&gt;# tweetDB = raw_input(&amp;quot;Please enter database name: &amp;quot;)&lt;/span&gt;
+&lt;span class="n"&gt;connect&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;sqlite3&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;connect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Stydia_Tweets.sqlite&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;cur&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;connect&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;cursor&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Creates the database&lt;/span&gt;
+&lt;span class="n"&gt;cur&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;executescript&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&amp;#39;&amp;#39;&lt;/span&gt;
+&lt;span class="s1"&gt;  CREATE TABLE IF NOT EXISTS Tweets (&lt;/span&gt;
+&lt;span class="s1"&gt;    id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,&lt;/span&gt;
+&lt;span class="s1"&gt;    tweet_id INTEGER,&lt;/span&gt;
+&lt;span class="s1"&gt;    tweet_user TEXT,&lt;/span&gt;
+&lt;span class="s1"&gt;    tweet_text TEXT,&lt;/span&gt;
+&lt;span class="s1"&gt;    tweet_date TEXT,&lt;/span&gt;
+&lt;span class="s1"&gt;    tweet_hash TEXT,&lt;/span&gt;
+&lt;span class="s1"&gt;    tweet_RTs TEXT,&lt;/span&gt;
+&lt;span class="s1"&gt;    tweet_faves TEXT,&lt;/span&gt;
+&lt;span class="s1"&gt;    tweet_ment TEXT,&lt;/span&gt;
+&lt;span class="s1"&gt;    tweet_loc TEXT,&lt;/span&gt;
+&lt;span class="s1"&gt;    tweet_link TEXT);&lt;/span&gt;
+&lt;span class="s1"&gt;  &amp;#39;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Included time to track how long it took to collect data&lt;/span&gt;
+&lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Start: &amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;datetime&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;datetime&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;now&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;strftime&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;%Y/%m/&lt;/span&gt;&lt;span class="si"&gt;%d&lt;/span&gt;&lt;span class="s1"&gt; %H:%M:%S&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Working...&amp;quot;&lt;/span&gt;
+
+&lt;span class="c1"&gt;# User inputs which search term to query, i.e. &amp;quot;stydia&amp;quot; or &amp;quot;teenwolf&amp;quot;&lt;/span&gt;
+&lt;span class="n"&gt;query&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;raw_input&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Please enter search term: &amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c1"&gt;# From when to when? In my case, from 2016-02-08 until 2016-02-13.&lt;/span&gt;
+&lt;span class="n"&gt;start&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;raw_input&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Please enter start date in YYYY-MM-DD format: &amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;end&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;raw_input&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Please enter end date in YYYY-MM-DD format: &amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Taken straight from GOT documentation. Calls the got manager and creates&lt;/span&gt;
+&lt;span class="c1"&gt;# a search query, much like you would do through Twitter&amp;#39;s advanced search.&lt;/span&gt;
+&lt;span class="n"&gt;tweetCriteria&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;got&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;manager&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;TweetCriteria&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;setQuerySearch&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+  &lt;span class="n"&gt;query&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;setSince&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;start&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;setUntil&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;end&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Used the following to check that the code was running. Commented it out for&lt;/span&gt;
+&lt;span class="c1"&gt;# faster output.&lt;/span&gt;
+&lt;span class="n"&gt;tweet_info&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;got&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;manager&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;TweetManager&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;getTweets&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;tweetCriteria&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="n"&gt;tweet_info&lt;/span&gt;
+
+&lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Complete.&amp;quot;&lt;/span&gt;
+&lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;End: &amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;datetime&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;datetime&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;now&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;strftime&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;%Y/%m/&lt;/span&gt;&lt;span class="si"&gt;%d&lt;/span&gt;&lt;span class="s1"&gt; %H:%M:%S&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;The script produced a database of the following format:&lt;/p&gt;
+&lt;p align="center"&gt;
+  &lt;img src="/images/articles/stydia-rising/Tweets DB TeenWolf.png" alt="Tweets DB TeenWolf" width="100%"&gt;
+  &lt;p style="text-align:center;"&gt;&lt;sup&gt;&lt;em&gt;Database containing tweets tagged or mentioning #teenwolf. 80,765 tweets collected from Feb. 8, 2016 to Feb. 13, 2016. All dates and times are Japan Standard Time. Note records 48,269 and 48,278 which refer to "Stydia rising."&lt;/em&gt;&lt;/sup&gt;
+  &lt;/p&gt;
+&lt;/p&gt;
+
+&lt;p align="center"&gt;
+  &lt;img src="/images/articles/stydia-rising/Tweets DB Stydia.png" alt="Tweets DB Stydia" width="100%"&gt;
+  &lt;p style="text-align:center;"&gt;&lt;sup&gt;&lt;em&gt;Database containing tweets tagged or mentioning #stydia. 34,348 tweets collected from Feb. 7, 2016 to Feb. 13, 2016. All dates and times are Japan Standard Time.&lt;/em&gt;&lt;/sup&gt;
+  &lt;/p&gt;
+&lt;/p&gt;
+
+&lt;h3&gt;&lt;a id="dissection"&gt;&lt;/a&gt;Dissection&lt;/h3&gt;
+&lt;p&gt;As I'm still currently taking machine learning courses, I'm not yet at the point where I feel comfortable performing sentiment analysis on the data. As such, those questions (whether a tweet is pro- or anti-Stydia, what the overall sentiment during the episode premiere was) will have to be saved for future research endeavors.&lt;/p&gt;
+&lt;p&gt;However, I was able to answer most of my original questions, as well as some other questions that I developed during the analysis.&lt;/p&gt;
+&lt;p&gt;Following in the footsteps of the &lt;a href="http://blog.aylien.com/post/140037240328/super-bowl-50-according-to-twitter-sentiment"&gt;Super Bowl 50 Analysis&lt;/a&gt;, I used Tableau to visualize my results.&lt;/p&gt;
+&lt;h4&gt;Can we see an increase in tweets at the point where Stydia rises?&lt;/h4&gt;
+&lt;p&gt;Undoubtedly, the answer is yes.&lt;/p&gt;
+&lt;p&gt;Below is a visualization of the tweet volume over time during the S05E16 premiere:&lt;/p&gt;
+&lt;p align="center"&gt;
+  &lt;img src="/images/articles/stydia-rising/Tweets During 5x16 Premiere.png" alt="Tweets During 5x16 Premiere" width="50%" height="" style=""&gt;
+  &lt;p style="text-align:center;"&gt;&lt;sup&gt;&lt;em&gt;&lt;/em&gt;&lt;/sup&gt;
+  &lt;/p&gt;
+&lt;/p&gt;
+
+&lt;p&gt;There is an obvious spike in Twitter activity at around the 0:44 minute mark. This coincides with the exact scene during the premiere where Stiles says, "Lydia, please shut up and let me save your life." As Stydia fans in particular would react heavily to this scene, cross-referencing the #TeenWolf tweets with #Stydia tweets serve to bolster the argument that the Stydia scene is what everyone was reacting to. (A look at the database images above will show that this is indeed what fans were tweeting about at that moment.)&lt;/p&gt;
+&lt;p&gt;One of my original questions was whether or not this spike in reaction repeated itself throughout the week. Many shows will premiere at 9 PM in each subsequent time zone - meaning EST viewers will see the show before PST ones. However, this does not seem to be the case for &lt;em&gt;Teen Wolf&lt;/em&gt;: of the 80,000 or so tweets pulling during the week, &lt;strong&gt;20,000 occurred during the hour of the 9 PM EST time slot alone&lt;/strong&gt;, suggesting that the show airs at the same time across the US (indeed, a quick google search shows that &lt;em&gt;Teen Wolf&lt;/em&gt; airs at 6 PM PST).&lt;/p&gt;
+&lt;p align="center"&gt;
+  &lt;img src="/images/articles/stydia-rising/TW week of.png" alt="Teen Wolf week of tweets" width="50%" height="" style=""&gt;
+  &lt;p style="text-align:center;"&gt;&lt;sup&gt;&lt;em&gt;Spike in tweets during the S05E16 premiere only (9 PM EST~6 PM PST Feb. 9, corresponding 11 AM JST Feb. 10). Suggesting that S05E16 premiered in all time zones simultaneously.&lt;/em&gt;&lt;/sup&gt;
+  &lt;/p&gt;
+&lt;/p&gt;
+
+&lt;h4&gt;What were the most retweeted and liked tweets?&lt;/h4&gt;
+&lt;p&gt;I used the following script to get the top 10 retweeted and liked tweets and write the links out to a text file:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# -*- coding: UTF-8 -*-&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;sqlite3&lt;/span&gt;
+
+&lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Starting.&amp;quot;&lt;/span&gt;
+
+&lt;span class="c1"&gt;# connect = sqlite3.connect(&amp;quot;TeenWolf_Tweets.sqlite&amp;quot;)&lt;/span&gt;
+&lt;span class="n"&gt;connect&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;sqlite3&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;connect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Stydia_Tweets.sqlite&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;cur&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;connect&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;cursor&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+&lt;span class="n"&gt;cur&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;execute&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&amp;#39;&amp;#39;&lt;/span&gt;
+&lt;span class="s1"&gt;  SELECT tweet_RTs, tweet_faves, tweet_ment, tweet_link FROM Tweets&lt;/span&gt;
+&lt;span class="s1"&gt;  WHERE tweet_date BETWEEN &amp;quot;2016-02-10 11:00:00&amp;quot; AND &amp;quot;2016-02-10 11:59:59&amp;quot;&lt;/span&gt;
+&lt;span class="s1"&gt;  ORDER BY cast(tweet_RTs as int) DESC LIMIT 10&amp;#39;&amp;#39;&amp;#39;&lt;/span&gt;
+  &lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="n"&gt;fhand&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;open&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;StydiaFaves.txt&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;w&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="n"&gt;fhand&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;write&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Top Ten Retweets:&lt;/span&gt;&lt;span class="se"&gt;\n\r&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="n"&gt;index&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
+&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;line&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;cur&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+  &lt;span class="n"&gt;fhand&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;write&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;str&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;index&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="n"&gt;fhand&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;write&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;RTs: &amp;quot;&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;line&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="n"&gt;fhand&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;write&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Faves: &amp;quot;&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;line&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="n"&gt;fhand&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;write&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Mentions: &amp;quot;&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;line&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="n"&gt;fhand&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;write&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Link: &amp;quot;&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;line&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="se"&gt;\n\r&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="n"&gt;index&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;index&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
+
+&lt;span class="n"&gt;cur&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;execute&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&amp;#39;&amp;#39;&lt;/span&gt;
+&lt;span class="s1"&gt;  SELECT tweet_RTs, tweet_faves, tweet_ment, tweet_link FROM Tweets&lt;/span&gt;
+&lt;span class="s1"&gt;  WHERE tweet_date BETWEEN &amp;quot;2016-02-10 11:00:00&amp;quot; AND &amp;quot;2016-02-10 11:59:59&amp;quot;&lt;/span&gt;
+&lt;span class="s1"&gt;  ORDER BY cast(tweet_faves as int) DESC LIMIT 10&amp;#39;&amp;#39;&amp;#39;&lt;/span&gt;
+&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="n"&gt;fhand&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;write&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="se"&gt;\n\r&lt;/span&gt;&lt;span class="s2"&gt;Top Ten Faves:&lt;/span&gt;&lt;span class="se"&gt;\n\r&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="n"&gt;index&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
+&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;line&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;cur&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+  &lt;span class="n"&gt;fhand&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;write&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;str&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;index&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="n"&gt;fhand&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;write&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;RTs: &amp;quot;&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;line&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="n"&gt;fhand&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;write&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Faves: &amp;quot;&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;line&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="n"&gt;fhand&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;write&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Mentions: &amp;quot;&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;line&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="n"&gt;fhand&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;write&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Link: &amp;quot;&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;line&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="se"&gt;\n\r&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="n"&gt;index&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;index&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
+
+&lt;span class="n"&gt;fhand&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;close&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+&lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Done.&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;I was a bit off with the newlines, but I could read the results, so I didn't change it.&lt;/p&gt;
+&lt;p&gt;Here are some of the results:&lt;/p&gt;
+&lt;h5&gt;Top 5 #Stydia Tweets&lt;/h5&gt;
+&lt;blockquote class="twitter-tweet"&gt;
+&lt;p dir="ltr" lang="en"&gt;Too many RT &lt;a href="https://twitter.com/xxlaliter"&gt;@xxlaliter&lt;/a&gt;: &lt;a href="https://twitter.com/hollandroden"&gt;@hollandroden&lt;/a&gt; FAVORITE STYDIA SCENE?!&lt;/p&gt;
+— holland roden (@hollandroden) &lt;a href="https://twitter.com/hollandroden/status/697251993761386496"&gt;February 10, 2016&lt;/a&gt;&lt;/blockquote&gt;
+
+&lt;blockquote class="twitter-tweet"&gt;
+&lt;p dir="ltr" lang="en"&gt;STYDIA HAS LITERALLY BEEN THERE SINCE THE BEGINNING AND IT AIN'T GOIN' ANYWHERE. &lt;a href="https://twitter.com/hashtag/TEENWOLF?src=hash"&gt;#TEENWOLF&lt;/a&gt;&lt;/p&gt;
+— Tyler Hoechlin Army (@HoechlinArmy) &lt;a href="https://twitter.com/HoechlinArmy/status/697250432708513792"&gt;February 10, 2016&lt;/a&gt;&lt;/blockquote&gt;
+
+&lt;blockquote class="twitter-tweet"&gt;
+&lt;p dir="ltr" lang="en"&gt;Stiles asking Lydia to "wake up" is the new Ryan asking Marissa to "wake up" in Tijuana &lt;a href="https://twitter.com/hashtag/TeenWolf?src=hash"&gt;#TeenWolf&lt;/a&gt; &lt;a href="https://twitter.com/hashtag/TheOC?src=hash"&gt;#TheOC&lt;/a&gt; &lt;a href="https://twitter.com/hashtag/Stydia?src=hash"&gt;#Stydia&lt;/a&gt; &lt;a href="https://t.co/K7xVxsKvW2"&gt;pic.twitter.com/K7xVxsKvW2&lt;/a&gt;&lt;/p&gt;
+— Samantha Highfill (@samhighfill) &lt;a href="https://twitter.com/samhighfill/status/697252830021701632"&gt;February 10, 2016&lt;/a&gt;&lt;/blockquote&gt;
+
+&lt;blockquote class="twitter-tweet"&gt;
+&lt;p dir="ltr" lang="en"&gt;Scott is the number one Stydia shipper &lt;a href="https://twitter.com/hashtag/TeenWolf?src=hash"&gt;#TeenWolf&lt;/a&gt;&lt;/p&gt;
+— Becky | TW IS LIT (@xBreeTanner) &lt;a href="https://twitter.com/xBreeTanner/status/697253454763286529"&gt;February 10, 2016&lt;/a&gt;&lt;/blockquote&gt;
+
+&lt;blockquote class="twitter-tweet"&gt;
+&lt;p dir="ltr" lang="en"&gt;That Stydia scene had me like &lt;a href="https://twitter.com/hashtag/TeenWolf?src=hash"&gt;#TeenWolf&lt;/a&gt; &lt;a href="https://t.co/dO4UYEM12p"&gt;pic.twitter.com/dO4UYEM12p&lt;/a&gt;&lt;/p&gt;
+— J (@dylanogposey) &lt;a href="https://twitter.com/dylanogposey/status/697250893662650369"&gt;February 10, 2016&lt;/a&gt;&lt;/blockquote&gt;
+
+&lt;p&gt;Those are the Stydia tweets. Now what about the ones that mention #TeenWolf...?&lt;/p&gt;
+&lt;h5&gt;Top 5 #TeenWolf Tweets&lt;/h5&gt;
+&lt;blockquote class="twitter-tweet"&gt;
+&lt;p dir="ltr" lang="en"&gt;"Please shut up and let me save your life." OMG HELP &lt;a href="https://twitter.com/hashtag/TeenWolf?src=hash"&gt;#TeenWolf&lt;/a&gt; &lt;a href="https://t.co/YIRU9ztQk5"&gt;https://t.co/YIRU9ztQk5&lt;/a&gt;&lt;/p&gt;
+— TEEN WOLF (@MTVteenwolf) &lt;a href="https://twitter.com/MTVteenwolf/status/697249631022006272"&gt;February 10, 2016&lt;/a&gt;&lt;/blockquote&gt;
+
+&lt;blockquote class="twitter-tweet"&gt;
+&lt;p dir="ltr" lang="en"&gt;"Stiles saved me." THE TEARS WON'T STOP &lt;a href="https://twitter.com/hashtag/TeenWolf?src=hash"&gt;#TeenWolf&lt;/a&gt; &lt;a href="https://t.co/DT22msCIH1"&gt;pic.twitter.com/DT22msCIH1&lt;/a&gt;&lt;/p&gt;
+— TEEN WOLF (@MTVteenwolf) &lt;a href="https://twitter.com/MTVteenwolf/status/697253292980768771"&gt;February 10, 2016&lt;/a&gt;&lt;/blockquote&gt;
+
+&lt;blockquote class="twitter-tweet"&gt;
+&lt;p dir="ltr" lang="en"&gt;YALL I AM AN EMOTIONAL MESS AND NO, IM NOT OKAY &lt;a href="https://twitter.com/hashtag/TeenWolf?src=hash"&gt;#TeenWolf&lt;/a&gt;&lt;/p&gt;
+— TEEN WOLF (@MTVteenwolf) &lt;a href="https://twitter.com/MTVteenwolf/status/697252749323407360"&gt;February 10, 2016&lt;/a&gt;&lt;/blockquote&gt;
+
+&lt;blockquote class="twitter-tweet"&gt;
+&lt;p dir="ltr" lang="en"&gt;STOP IM CRYING WTF &lt;a href="https://twitter.com/hashtag/TeenWolf?src=hash"&gt;#TeenWolf&lt;/a&gt;&lt;/p&gt;
+— TEEN WOLF (@MTVteenwolf) &lt;a href="https://twitter.com/MTVteenwolf/status/697252958061404164"&gt;February 10, 2016&lt;/a&gt;&lt;/blockquote&gt;
+
+&lt;blockquote class="twitter-tweet"&gt;
+&lt;p dir="ltr" lang="ht"&gt;LOLOLOL LIAM &lt;a href="https://twitter.com/hashtag/TeenWolf?src=hash"&gt;#TeenWolf&lt;/a&gt; &lt;a href="https://t.co/1CuShuC7s6"&gt;pic.twitter.com/1CuShuC7s6&lt;/a&gt;&lt;/p&gt;
+— TEEN WOLF (@MTVteenwolf) &lt;a href="https://twitter.com/MTVteenwolf/status/697245304186339328"&gt;February 10, 2016&lt;/a&gt;&lt;/blockquote&gt;
+
+&lt;p&gt;Stydia for the win! 4 out of 5 of the most liked and retweeted tweets tagged #TeenWolf are in reference to Stydia. The most popular tweet even explicitly mentions Stiles' line, "Lydia, please shut up and let me save your life."&lt;/p&gt;
+&lt;p&gt;The most popular #TeenWolf tweets are also those tweeted by the official show Twitter, @MTVteenwolf. This makes sense, as many die-hard fans would love a chance to interact with show officials, even if it's something as simple as retweeting. In addition, many fans appreciate show officials tweeting their reactions to the show as well. In fact, the show creator as well as several of the actors frequently interact with their fans on Twitter, so it should come as no surprise that the most liked tweets come from the official MTV account.&lt;/p&gt;
+&lt;h4&gt;What were the most popular hashtags during the premiere?&lt;/h4&gt;
+&lt;p&gt;In addition to the most popular tweets, I was interested in the most popular hashtags used throughout the week. When first scrolling through the data, I noticed many hashtags (like #webelieveinstydia and #StydiaIsRising) that I hadn't expected.&lt;/p&gt;
+&lt;p&gt;The script I used to count the hashtags can be found below:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# -*- coding: UTF-8 -*-&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;sqlite3&lt;/span&gt;
+
+&lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Starting.&amp;quot;&lt;/span&gt;
+
+&lt;span class="n"&gt;connect&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;sqlite3&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;connect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;TeenWolf_Tweets.sqlite&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="c1"&gt;# connect = sqlite3.connect(&amp;quot;Stydia_Tweets.sqlite&amp;quot;)&lt;/span&gt;
+&lt;span class="n"&gt;cur&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;connect&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;cursor&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+&lt;span class="n"&gt;connect2&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;sqlite3&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;connect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;TW_Hashtags_PREMIERE.sqlite&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="c1"&gt;# connect2 = sqlite3.connect(&amp;quot;Stydia_Hashtags_PREMIERE.sqlite&amp;quot;)&lt;/span&gt;
+&lt;span class="n"&gt;cur2&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;connect2&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;cursor&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+&lt;span class="n"&gt;cur2&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;execute&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&amp;#39;&amp;#39;DROP TABLE IF EXISTS Hashtags &amp;#39;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="n"&gt;cur2&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;executescript&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&amp;#39;&amp;#39;&lt;/span&gt;
+&lt;span class="s1"&gt;  CREATE TABLE IF NOT EXISTS Hashtags (&lt;/span&gt;
+&lt;span class="s1"&gt;    id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,&lt;/span&gt;
+&lt;span class="s1"&gt;    hashtag TEXT,&lt;/span&gt;
+&lt;span class="s1"&gt;    num_users INTEGER);&amp;#39;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="n"&gt;cur&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;execute&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&amp;#39;&amp;#39;&lt;/span&gt;
+&lt;span class="s1"&gt;  SELECT tweet_hash FROM TeenWolf_Tweets WHERE tweet_date&lt;/span&gt;
+&lt;span class="s1"&gt;  BETWEEN &amp;quot;2016-02-10 11:00:00&amp;quot; AND &amp;quot;2016-02-10 11:59:59&amp;quot;&amp;#39;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="n"&gt;hashtags&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;dict&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;get_hashtags&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;item&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+  &lt;span class="c1"&gt;# Split the first index of the list (the hashtags) on the (#) symbol&lt;/span&gt;
+  &lt;span class="n"&gt;item&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;item&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;split&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;#&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;tag&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;item&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="c1"&gt;# Ignore empty values&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="nb"&gt;len&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;tag&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+      &lt;span class="c1"&gt;# Consolidates TeenWolf, teenwolf, TEENWOLF all as one hashtag&lt;/span&gt;
+      &lt;span class="n"&gt;tag&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;tag&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;lower&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;strip&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+      &lt;span class="k"&gt;try&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="c1"&gt;# Add the hashtag to the dictionary&lt;/span&gt;
+        &lt;span class="n"&gt;hashtags&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;tag&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;hashtags&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;tag&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
+      &lt;span class="k"&gt;except&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="n"&gt;hashtags&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;tag&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
+
+&lt;span class="c1"&gt;# item is a list of values from the database; in this case, hashtags&lt;/span&gt;
+&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;item&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;cur&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+  &lt;span class="c1"&gt;# ignore entries with no hashtags&lt;/span&gt;
+  &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="nb"&gt;len&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;item&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;amp&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="n"&gt;amp&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="n"&gt;amp&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="n"&gt;gt&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="n"&gt;get_hashtags&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;item&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;item&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;hashtags&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+  &lt;span class="n"&gt;cur2&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;execute&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&amp;#39;&amp;#39;&lt;/span&gt;
+&lt;span class="s1"&gt;  INSERT OR IGNORE INTO Hashtags (hashtag, num_users) VALUES (?, ?)&amp;#39;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+  &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;item&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;hashtags&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;item&lt;/span&gt;&lt;span class="p"&gt;]))&lt;/span&gt;
+  &lt;span class="n"&gt;connect2&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;commit&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+&lt;span class="n"&gt;connect2&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;commit&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Done.&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;I wrote the output to a database and imported it into Tableau in order to create a word cloud to visualize the frequencies.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Most Frequently Used Hashtags Along with #TeenWolf During the S05E16 Premiere&lt;/strong&gt;&lt;/p&gt;
+&lt;p align="center"&gt;
+  &lt;img src="/images/articles/stydia-rising/TW Premiere hashtags limit 2.png" alt="TW Premiere hashtags" width="100%" height="" style=""&gt;
+  &lt;p style="text-align:center;"&gt;&lt;sup&gt;&lt;em&gt;Showing hashtags used along with #TeenWolf during the hour of the S05E16 premiere. Hashtags with at least 2 counts are included.&lt;/em&gt;&lt;/sup&gt;
+  &lt;/p&gt;
+&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Most Frequently Used Hashtags Along with #Stydia During the S05E16 Premiere&lt;/strong&gt;&lt;/p&gt;
+&lt;p align="center"&gt;
+  &lt;img src="/images/articles/stydia-rising/Stydia Premiere hashtags limit 1.png" alt="Stydia Premiere hashtags" width="100%" height="" style=""&gt;
+  &lt;p style="text-align:center;"&gt;&lt;sup&gt;&lt;em&gt;Showing hashtags used along with #Stydia during the hour of the S05E16 premiere. Hashtags with at least 1 count are included.&lt;/em&gt;&lt;/sup&gt;
+  &lt;/p&gt;
+&lt;/p&gt;
+
+&lt;p&gt;One of my original questions was to see what the trending hashtags were throughout the week. The visualizations for these are below.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Most Frequently Used Hashtags Along with #TeenWolf (Feb. 8 - Feb. 13 JST)&lt;/strong&gt;&lt;/p&gt;
+&lt;p align="center"&gt;
+  &lt;img src="/images/articles/stydia-rising/TW Week of Hashtags limit 10.png" alt="TW Week of Hashtags limit 10" width="100%" height="" style=""&gt;
+  &lt;p style="text-align:center;"&gt;&lt;sup&gt;&lt;em&gt;Showing hashtags used along with #TeenWolf during the week of Feb. 8 to Feb. 13. Hashtags with at least 10 counts are included.&lt;/em&gt;&lt;/sup&gt;
+  &lt;/p&gt;
+&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Most Frequently Used Hashtags Along with #Stydia (Feb. 7 - Feb. 13 JST)&lt;/strong&gt;&lt;/p&gt;
+&lt;p align="center"&gt;
+  &lt;img src="/images/articles/stydia-rising/Stydia Week of Hashtags limit 5.png" alt="Stydia Week of Hashtags limit 5" width="100%" height="" style=""&gt;
+  &lt;p style="text-align:center;"&gt;&lt;sup&gt;&lt;em&gt;Showing hashtags used along with #Stydia during the week of Feb. 7 to Feb. 13. Hashtags with at least 5 counts are included.&lt;/em&gt;&lt;/sup&gt;
+  &lt;/p&gt;
+&lt;/p&gt;
+
+&lt;p&gt;Hashtags during the premiere of course focused on what was going on in the show (i.e. #puppystyle, #EscapeFromEichen). There was also a live chat going on with Holland Roden, the actress who plays Lydia, so #askholland was trending during the show as well.&lt;/p&gt;
+&lt;p&gt;However, as we look towards the rest of the week other hashtags start to crop up - for example, #KCA and #TheShannara#Chronicles - as viewers reference &lt;em&gt;Teen Wolf&lt;/em&gt; in relation to other shows they watch (as well as to the Kids Choice Awards, which at the time were coming up in a few weeks).&lt;/p&gt;
+&lt;p&gt;Furthermore, the all-week #TeenWolf and #Stydia clouds show two very interesting hashtags: #BancoDeSeries and #TeenWolfPoland, respectively. I found out through my analysis that not only was &lt;em&gt;Teen Wolf&lt;/em&gt; popular in the States; it seemed to have a sizable following worldwide!&lt;/p&gt;
+&lt;h4&gt;Where else in the world was S05E16 watched?&lt;/h4&gt;
+&lt;p&gt;I took the tweets for which location data was available and output their counts to a database using a modified version of the &lt;code&gt;hashtags.py&lt;/code&gt; script. I then visualized the results on a map in Tableau. Note that I could only plot tweets for which location data was available; less than 4% of all tweets. However, the visualization did show me that &lt;em&gt;Teen Wolf&lt;/em&gt; is indeed an international phenomenon.&lt;/p&gt;
+&lt;p align="center"&gt;
+  &lt;img src="/images/articles/stydia-rising/5x16 Around the World.png" alt="Teen Wolf around the world" width="100%" height="" style=""&gt;
+  &lt;p style="text-align:center;"&gt;&lt;sup&gt;&lt;em&gt;&lt;/em&gt;&lt;/sup&gt;
+  &lt;/p&gt;
+&lt;/p&gt;
+
+&lt;h2&gt;&lt;a id="discussion"&gt;&lt;/a&gt;Discussion&lt;/h2&gt;
+&lt;p&gt;I managed to answer most of my pressing questions. I successfully visualized Twitter data for my favorite show during one of the most influential episodes for Stydia shippers. I was able to make a contribution to my fandom and I am very proud of myself for that. I also learned how to use a new tool (Tableau) with which I felt quite uncomfortable at first, but with more practice I quickly got the hang of it.&lt;/p&gt;
+&lt;p&gt;Overall I am very happy with this project and consider it a great success!&lt;/p&gt;
+&lt;h3&gt;&lt;a id="debug"&gt;&lt;/a&gt;Debug&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;It took entirely too long to get the GOT program working.&lt;/strong&gt; I spent way more time than necessary trying to pull the tweets. The very first thing I should have done when using somebody else's program is go through and read the code to see what it does. GOT has very little documentation so this should have been even more pressing. Next time I'll be sure to keep this in mind.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;I did not calculate how much RAM I would need to run the program.&lt;/strong&gt; When I was first working with the GOT model I kept getting disk I/O errors and my laptop kept stalling out. Of course once I got the tweets to write out to a DB in real time this wasn't an issue, but I think it's important to learn how to calculate RAM and such for when I will need it in the future.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;The project needed more organization.&lt;/strong&gt; Of course at the beginning I could not imagine the number of tweets I would get; the scope of the project evaded me at that time. While I did have separate directories for the code, the data, the documentation and the output, I could have done a better job keeping in its place. I ended up with a lot of files in the end, and a consistent naming scheme, for example, could have saved me a lot of confusion. I also may have benefited from using version control this time around. That is something I look forward to working more with in future projects.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;The project needed clearer definition.&lt;/strong&gt; All I knew was that I wanted to get tweets and I wanted to look at them at one point in time. I didn't specify at the beginning how many tweets I wanted to collected, the date and time I wanted them to be from, and what exactly I wanted to do with them. I ended up collecting more data than I needed (which is not necessarily a bad thing), and writing extra scripts towards the end of the analysis to do things I hadn't thought of before. While this is to be expected, next time I look forward to created a solid project plan so that I can know more clearly what I want to do with my data before I get it.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3&gt;&lt;a id="directions"&gt;&lt;/a&gt;Directions&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Perform sentiment analysis on the dataset.&lt;/strong&gt; This is something that I got from the Super Bowl 50 analysis that I wanted to try for myself. What was the overall sentiment during the S05E16 episode? Did it change over time? Can we tell if a tweet is pro- or anti-Stydia? Fandom has interesting ways of representing positive sentiment (for example, the phrase "STYDIA VINES HURT SO MUCH" should actually be interpreted positively), so I wonder how current text analytics tools would work on fandom-derived data.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Consolidate the scripts into a seamless program.&lt;/strong&gt; This wasn't something I set out to do, but I think it could be helpful. I know that lots of programs exist already to perform Twitter analysis, but I might like to challenge myself by creating a version of my own.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Issue a pull request to the GOT model.&lt;/strong&gt; I found it very helpful to be able to write the tweets out to a database in real time instead of reading them all into memory. I know that there are others out there who may also need to pull tens of thousands of tweets that were written in the past. I hope to adapt my code to a general usage and issue a pull request to the GOT model on GitHub so that others can benefit from this as well.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2&gt;&lt;a id="disseminate"&gt;&lt;/a&gt;Disseminate&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="http://blog.aylien.com/post/140037240328/super-bowl-50-according-to-twitter-sentiment"&gt;Aylien's Super Bowl 50 Analysis&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://public.tableau.com/s/"&gt;Tableau Public Visualization Tool&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://public.tableau.com/profile/jaya.z.powell"&gt;My interactive "Stydia Rising" dashboard on Tableau&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/Jefferson-Henrique/GetOldTweets-python/"&gt;The Python model I used to get old tweets&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><category term="data analysis"></category><category term="python"></category><category term="sql"></category><category term="tableau"></category><category term="twitter"></category></entry></feed>
