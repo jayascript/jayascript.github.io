@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>  Shell Hell | JayaScript
+</title>
+  <link rel="canonical" href="/progress/shell-hell.html">
+
+
+  <link rel="stylesheet" href="/theme/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/theme/css/fontawesome.min.css">
+  <link rel="stylesheet" href="/theme/css/pygments/default.min.css">
+  <link rel="stylesheet" href="/theme/css/theme.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Raleway:wght@200&display=swap">
+
+  
+  <meta name="description" content="I've been having trouble with my shells for weeks. The paths were wrong with all of them. Something to do with Anaconda.">
+
+
+</head>
+
+<body>
+  <header class="header">
+    <div class="container">
+<div class="row">
+
+    <div class="col-sm-1 siteimagediv">
+      <p align="center">
+        <a href="/">
+          <img class="img-fluid rounded" id="siteimage" src=/images/data.png alt="JayaScript">
+        </a><img src="" alt="" width="100%" height="" style="">
+      </p>
+    </div>
+
+  <div class="col-sm-8 titlediv">
+    <h1 class="title"><a href="/">JayaScript</a></h1>
+    <p class="text-muted" id="sitesubtitle">Linux · Python · Developer · Analytics</p>
+  </div>
+
+    <div class="col-sm-4 link_box">
+      <ul class="list-inline">
+        <li class="list-inline-item"><a href="/index.html"><i class="fa fa-home"></i></a></li>
+        <li class="list-inline-item"><a href="/categories.html"><i class="fa fa-code"></i></a></li>
+        <li class="list-inline-item"><a href="/pages/about.html"><i class="fa fa-user-circle"></i></a></li>
+        <li class="list-inline-item"><a href="/pages/contact.html"><i class="fa fa-envelope"></i></a></li>
+          <li class="list-inline-item"><a class="fab fa-github" href="https://github.com/jayascript/" target="_blank"></a></li>
+          <li class="list-inline-item"><a class="fab fa-twitter" href="https://twitter.com/jayascript" target="_blank"></a></li>
+          <li class="list-inline-item"><a class="fab fa-linkedin" href="https://www.linkedin.com/in/jayazhane/" target="_blank"></a></li>
+          <li class="list-inline-item"><a class="fa fa-book" href="https://realpython.com/team/jayazhane/" target="_blank"></a></li>
+        <!--           <li class="list-inline-item"><a href="/" target="_blank">Home</a></li>
+          <li class="list-inline-item"><a href="/categories.html" target="_blank">Categories</a></li>
+
+              <li class="list-inline-item text-muted">|</li>
+            <li class="list-inline-item"><a href="/pages/about.html">About</a></li>
+            <li class="list-inline-item"><a href="/pages/contact.html">Contact</a></li>
+         -->
+      </ul>
+
+  </div>
+
+</div>    </div>
+  </header>
+
+  <div class="main">
+    <div class="container">
+      <h1>  Shell Hell
+</h1>
+      <hr>
+  <article class="article">
+    <header>
+      <ul class="list-inline">
+        <li class="list-inline-item text-muted">
+          <i class="fas fa-calendar" aria-hidden="true"></i>
+          2019-05-24
+        </li>
+        <li class="list-inline-item text-muted">
+          <i class="fas fa-folder-open" aria-hidden="true"></i>
+          <a href="/category/progress.html">Progress</a>
+        </li>
+          <li class="list-inline-item text-muted">
+            <i class="fas fa-tag"></i>
+              <a href="/tag/windows.html">#windows</a>,               <a href="/tag/bash.html">#bash</a>,               <a href="/tag/git-bash.html">#git bash</a>,               <a href="/tag/anaconda.html">#anaconda</a>,               <a href="/tag/virtual-environments.html">#virtual environments</a>          </li>
+      </ul>
+    </header>
+    <p align="center">
+        <picture>
+          <img id="cover" width="100%" src="/images/articles/progress/bashrc_conda.jpg" alt="Shell Hell">
+        </picture>
+    </p>
+    <div class="content">
+      <h1>Several Issues</h1>
+<p>I've been having trouble with my shells for weeks. The paths were wrong with all of them. Something to do with Anaconda.</p>
+<h2>Issue #1: Windows Command Prompt</h2>
+<p>I kept getting a message that read <code>"The system cannot find the path specified."</code></p>
+<p>I tried editing the <code>PATH</code> variables, but that didn't change it. Finally I found <a href="https://superuser.com/questions/727316/error-in-command-line-the-system-cannot-find-the-path-specified">this answer</a> on StackExchange which said to edit the registry.</p>
+<p>There was a path to a <code>conda_hook.BAT</code> in <code>HKCU\Software\Microsoft\Command Processor\AutoRun</code> and nothing in <code>HKLM\...\AutoRun</code>.</p>
+<p><strong>Solution:</strong> Clearing the HKCU AutoRun value cleared the prompt.</p>
+<h2>Issue #2: Git Bash for Windows</h2>
+<p>The top of the console read <code>bash: $'\377\376.': command not found"</code>.</p>
+<p>After spending some time examining the file structure, I noticed there was a weird looking blob of unreadable text at the beginning of <code>~/.bashrc</code> which was trying to point to <code>C:\Users\jzpow\Anaconda3/etc/profile.d/conda.sh</code>.</p>
+<p>For the longest time, I couldn't for the life of me figure out what <code>'\377\376.'</code> was.</p>
+<p>After learning more bash scripting, I remembered that variables were declared with <code>$</code> and could be displayed with <code>ECHO</code>, so I ran <code>ECHO $'\377\376.'</code> and out came the strange unreadable character at the beginning of the <code>~/.bashrc</code> file!</p>
+<p><img alt="Git Bash prompt" src="/images/articles/progress/bashrc_conda.jpg"></p>
+<p><strong>Solution:</strong> After clearing <code>~/.bashrc</code> and restarting the shell, the error message was gone.</p>
+<h2>Issue #3: Windows PowerShell</h2>
+<p>PowerShell was showing the following error:</p>
+<div class="highlight"><pre><span></span><span class="go">. : File C:\Users\jzpow\Documents\WindowsPowerShell\profile.ps1 cannot be loaded because running scripts is disabled</span>
+<span class="go">on this system. For more information, see about_Execution_Policies at https:/go.microsoft.com/fwlink/?LinkID=135170.</span>
+<span class="go">At line:1 char:3</span>
+<span class="go">+ . &#39;C:\Users\jzpow\Documents\WindowsPowerShell\profile.ps1&#39;</span>
+<span class="go">+   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span>
+<span class="go">    + CategoryInfo          : SecurityError: (:) [], PSSecurityException</span>
+<span class="go">    + FullyQualifiedErrorId : UnauthorizedAccess</span>
+</pre></div>
+
+
+<p>After scanning the docs, I learned that PowerShell has an <a href="https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_execution_policies?view=powershell-6">execution policy</a> that controls running scripts and loading configuration files. In order for the scripts to be run properly, I needed to enable that functionality on the system.</p>
+<p>Indeed, running <code>$ Get-ExecutionPolicy</code> showed <code>"Restricted"</code>. Adding <code>...-List</code> showed that all scopes were undefined, meaning there was no execution policy set on the system.</p>
+<p>With confirmation from <a href="https://www.faqforge.com/windows/windows-powershell-running-scripts-is-disabled-on-this-system/">this post</a>, I ran <code>$ set-executionpolicy remotesigned</code>and saw the following error message:</p>
+<div class="highlight"><pre><span></span><span class="go">&amp; : The term &#39;C:\Users\jzpow\Anaconda3\Scripts\conda.exe&#39; is not recognized as the name of a cmdlet, function, script</span>
+<span class="go">file, or operable program. Check the spelling of the name, or if a path was included, verify that the path is correct</span>
+<span class="go">and try again.</span>
+<span class="go">At C:\Users\jzpow\Documents\WindowsPowerShell\profile.ps1:4 char:4</span>
+<span class="go">+ (&amp; &quot;C:\Users\jzpow\Anaconda3\Scripts\conda.exe&quot; &quot;shell.powershell&quot; &quot;h ...</span>
+<span class="go">+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span>
+<span class="go">    + CategoryInfo          : ObjectNotFound: (C:\Users\jzpow\...ripts\conda.exe:String) [], CommandNotFoundException</span>
+<span class="go">    + FullyQualifiedErrorId : CommandNotFoundException</span>
+</pre></div>
+
+
+<p>It looks bad, but it's actually a step in the right direction. This just means I need to initialize conda for the current shell, so I ran <code>$ conda init</code>.</p>
+<p>Examining the output, I realized THAT'S what had changed <code>AutoRun</code> in the registry.</p>
+<p>On top of that, I had a nice error message pop up from yet another program... Bitdefender was blocking them!! I thought that might be the case.</p>
+<p>Here's the end of the output:</p>
+<div class="highlight"><pre><span></span>needs sudo    C:<span class="se">\U</span>sers<span class="se">\j</span>zpow<span class="se">\D</span>ocuments<span class="se">\W</span>indowsPowerShell<span class="se">\p</span>rofile.ps1
+modified      HKEY_CURRENT_USER<span class="se">\S</span>oftware<span class="se">\M</span>icrosoft<span class="se">\C</span>ommand Processor<span class="se">\A</span>utoRun
+</pre></div>
+
+
+<p><strong>Solution:</strong> I gave Python access to change files on the system, and then ran <code>$ conda init powershell</code>, which returned this:</p>
+<div class="highlight"><pre><span></span>modified      C:<span class="se">\U</span>sers<span class="se">\j</span>zpow<span class="se">\D</span>ocuments<span class="se">\W</span>indowsPowerShell<span class="se">\p</span>rofile.ps1
+</pre></div>
+
+
+<p>Then I reopened the shell and everything ran perfectly!! :D</p>
+<p>I'm really happy that I was able to debug these things on my own. It's very important to me to be able to work with my system by myself, navigate directories, change permissions, and fix things that are broken. If I'm going to be working with computers from here on out, I've got to get very good at figuring out what's going on when they break and how I can fix it.</p>
+    </div>
+  </article>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+<div class="row">
+  <ul class="col-sm-6 list-inline">
+    <li class="list-inline-item"><a href="/archives.html">Archives</a></li>
+    <li class="list-inline-item"><a href="/categories.html">Categories</a></li>
+      <li class="list-inline-item"><a href="/tags.html">Tags</a></li>
+      <li class="list-inline-item text-muted">|</li>
+        <li class="list-inline-item"><a class="fab fa-github" href="https://github.com/jayascript/" target="_blank"></a></li>
+        <li class="list-inline-item"><a class="fab fa-twitter" href="https://twitter.com/jayascript" target="_blank"></a></li>
+        <li class="list-inline-item"><a class="fab fa-linkedin" href="https://www.linkedin.com/in/jayazhane/" target="_blank"></a></li>
+        <li class="list-inline-item"><a class="fa fa-book" href="https://realpython.com/team/jayazhane/" target="_blank"></a></li>
+  </ul>
+
+  <p class="col-sm-6 text-sm-right text-muted">
+    Generated by <a href="https://github.com/getpelican/pelican" target="_blank">Pelican</a>
+    / <a href="https://github.com/nairobilug/pelican-alchemy" target="_blank">&#x2728;</a> © 2020 Jaya Z. Powell
+  </p>
+</div>    </div>
+  </footer>
+
+</body>
+
+</html>
