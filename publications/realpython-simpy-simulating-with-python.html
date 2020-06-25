@@ -88,15 +88,129 @@
     </header>
     <p align="center">
         <picture>
-          <img id="cover" width="100%" src="/images/articles/publications/realpython-simpy-simulating-with-python.jpg" alt="SimPy: Simulating Real-World Processes With Python | Real Python">
+          <img id="cover" width="100%" src="/images/posts/publications/realpython-simpy-simulating-with-python.jpg" alt="SimPy: Simulating Real-World Processes With Python | Real Python">
         </picture>
     </p>
     <div class="content">
-      <p>Podcasts are a great way to immerse yourself in an industry, especially when it comes to data science. The field moves extremely quickly, and it can be difficult to keep up with all the new developments happening each week!</p>
-<p>Take advantage of those times in the day when your body is busy, but your mind is free: when you’re commuting to work, exercising at the gym, or cleaning up around the house. These are optimal times to engage your brain in learning something new and ensure you’re staying at the top of your field.</p>
-<p>There are dozens of data science podcasts out there, covering everything from machine learning and artificial intelligence to big data analytics. We hope this will be a great resource for you to find useful, informative, and engaging shows.</p>
-<p>Get ready to dive in!</p>
+      <p>The real world is full of systems, like airports and highways, that frequently experience congestion and delay. When these systems are not optimized, their inefficiency can lead to countless unhappy customers and hours of wasted time. In this tutorial, you’ll learn how to use Python’s simpy framework to create virtual simulations that will help you solve problems like these.</p>
+<p>In this tutorial, you’ll learn how to:</p>
+<ul>
+<li><strong>Use</strong> a simulation to model a real-world process</li>
+<li><strong>Create</strong> a step-by-step algorithm to approximate a complex system</li>
+<li><strong>Design</strong> and run a real-world simulation in Python with simpy</li>
+</ul>
+<p>In this tutorial, you’ll create a simulation for a local movie theater. Your goal is to provide the manager with a script to help find the optimal number of employees to have on staff.</p>
 <p><strong>Read it on <a href="https://realpython.com/simpy-simulating-with-python/">Real Python</a></strong></p>
+<p>Here's the source code for this script:</p>
+<div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;Companion code to https://realpython.com/simulation-with-simpy/</span>
+<span class="sd">&#39;Simulating Real-World Processes With SimPy&#39;</span>
+<span class="sd">Python version: 3.7.3</span>
+<span class="sd">SimPy version: 3.0.11</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">simpy</span>
+<span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">import</span> <span class="nn">statistics</span>
+
+<span class="n">wait_times</span> <span class="o">=</span> <span class="p">[]</span>
+
+
+<span class="k">class</span> <span class="nc">Theater</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">env</span><span class="p">,</span> <span class="n">num_cashiers</span><span class="p">,</span> <span class="n">num_servers</span><span class="p">,</span> <span class="n">num_ushers</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">env</span> <span class="o">=</span> <span class="n">env</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cashier</span> <span class="o">=</span> <span class="n">simpy</span><span class="o">.</span><span class="n">Resource</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">num_cashiers</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">server</span> <span class="o">=</span> <span class="n">simpy</span><span class="o">.</span><span class="n">Resource</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">num_servers</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">usher</span> <span class="o">=</span> <span class="n">simpy</span><span class="o">.</span><span class="n">Resource</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">num_ushers</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">purchase_ticket</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">moviegoer</span><span class="p">):</span>
+        <span class="k">yield</span> <span class="bp">self</span><span class="o">.</span><span class="n">env</span><span class="o">.</span><span class="n">timeout</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">check_ticket</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">moviegoer</span><span class="p">):</span>
+        <span class="k">yield</span> <span class="bp">self</span><span class="o">.</span><span class="n">env</span><span class="o">.</span><span class="n">timeout</span><span class="p">(</span><span class="mi">3</span> <span class="o">/</span> <span class="mi">60</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">sell_food</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">moviegoer</span><span class="p">):</span>
+        <span class="k">yield</span> <span class="bp">self</span><span class="o">.</span><span class="n">env</span><span class="o">.</span><span class="n">timeout</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+
+
+<span class="k">def</span> <span class="nf">go_to_movies</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">moviegoer</span><span class="p">,</span> <span class="n">theater</span><span class="p">):</span>
+    <span class="c1"># Moviegoer arrives at the theater</span>
+    <span class="n">arrival_time</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">now</span>
+
+    <span class="k">with</span> <span class="n">theater</span><span class="o">.</span><span class="n">cashier</span><span class="o">.</span><span class="n">request</span><span class="p">()</span> <span class="k">as</span> <span class="n">request</span><span class="p">:</span>
+        <span class="k">yield</span> <span class="n">request</span>
+        <span class="k">yield</span> <span class="n">env</span><span class="o">.</span><span class="n">process</span><span class="p">(</span><span class="n">theater</span><span class="o">.</span><span class="n">purchase_ticket</span><span class="p">(</span><span class="n">moviegoer</span><span class="p">))</span>
+
+    <span class="k">with</span> <span class="n">theater</span><span class="o">.</span><span class="n">usher</span><span class="o">.</span><span class="n">request</span><span class="p">()</span> <span class="k">as</span> <span class="n">request</span><span class="p">:</span>
+        <span class="k">yield</span> <span class="n">request</span>
+        <span class="k">yield</span> <span class="n">env</span><span class="o">.</span><span class="n">process</span><span class="p">(</span><span class="n">theater</span><span class="o">.</span><span class="n">check_ticket</span><span class="p">(</span><span class="n">moviegoer</span><span class="p">))</span>
+
+    <span class="k">if</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="bp">True</span><span class="p">,</span> <span class="bp">False</span><span class="p">]):</span>
+        <span class="k">with</span> <span class="n">theater</span><span class="o">.</span><span class="n">server</span><span class="o">.</span><span class="n">request</span><span class="p">()</span> <span class="k">as</span> <span class="n">request</span><span class="p">:</span>
+            <span class="k">yield</span> <span class="n">request</span>
+            <span class="k">yield</span> <span class="n">env</span><span class="o">.</span><span class="n">process</span><span class="p">(</span><span class="n">theater</span><span class="o">.</span><span class="n">sell_food</span><span class="p">(</span><span class="n">moviegoer</span><span class="p">))</span>
+
+    <span class="c1"># Moviegoer heads into the theater</span>
+    <span class="n">wait_times</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">env</span><span class="o">.</span><span class="n">now</span> <span class="o">-</span> <span class="n">arrival_time</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">run_theater</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">num_cashiers</span><span class="p">,</span> <span class="n">num_servers</span><span class="p">,</span> <span class="n">num_ushers</span><span class="p">):</span>
+    <span class="n">theater</span> <span class="o">=</span> <span class="n">Theater</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">num_cashiers</span><span class="p">,</span> <span class="n">num_servers</span><span class="p">,</span> <span class="n">num_ushers</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">moviegoer</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+        <span class="n">env</span><span class="o">.</span><span class="n">process</span><span class="p">(</span><span class="n">go_to_movies</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">moviegoer</span><span class="p">,</span> <span class="n">theater</span><span class="p">))</span>
+
+    <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+        <span class="k">yield</span> <span class="n">env</span><span class="o">.</span><span class="n">timeout</span><span class="p">(</span><span class="mf">0.20</span><span class="p">)</span>  <span class="c1"># Wait a bit before generating a new person</span>
+
+        <span class="n">moviegoer</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">env</span><span class="o">.</span><span class="n">process</span><span class="p">(</span><span class="n">go_to_movies</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">moviegoer</span><span class="p">,</span> <span class="n">theater</span><span class="p">))</span>
+
+
+<span class="k">def</span> <span class="nf">get_average_wait_time</span><span class="p">(</span><span class="n">wait_times</span><span class="p">):</span>
+    <span class="n">average_wait</span> <span class="o">=</span> <span class="n">statistics</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">wait_times</span><span class="p">)</span>
+    <span class="c1"># Pretty print the results</span>
+    <span class="n">minutes</span><span class="p">,</span> <span class="n">frac_minutes</span> <span class="o">=</span> <span class="nb">divmod</span><span class="p">(</span><span class="n">average_wait</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">seconds</span> <span class="o">=</span> <span class="n">frac_minutes</span> <span class="o">*</span> <span class="mi">60</span>
+    <span class="k">return</span> <span class="nb">round</span><span class="p">(</span><span class="n">minutes</span><span class="p">),</span> <span class="nb">round</span><span class="p">(</span><span class="n">seconds</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">get_user_input</span><span class="p">():</span>
+    <span class="n">num_cashiers</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Input # of cashiers working: &quot;</span><span class="p">)</span>
+    <span class="n">num_servers</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Input # of servers working: &quot;</span><span class="p">)</span>
+    <span class="n">num_ushers</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Input # of ushers working: &quot;</span><span class="p">)</span>
+    <span class="n">params</span> <span class="o">=</span> <span class="p">[</span><span class="n">num_cashiers</span><span class="p">,</span> <span class="n">num_servers</span><span class="p">,</span> <span class="n">num_ushers</span><span class="p">]</span>
+    <span class="k">if</span> <span class="nb">all</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">.</span><span class="n">isdigit</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">params</span><span class="p">):</span>  <span class="c1"># Check input is valid</span>
+        <span class="n">params</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">params</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span>
+            <span class="s2">&quot;Could not parse input. Simulation will use default values:&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">1 cashier, 1 server, 1 usher.&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">params</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">params</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="c1"># Setup</span>
+    <span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+    <span class="n">num_cashiers</span><span class="p">,</span> <span class="n">num_servers</span><span class="p">,</span> <span class="n">num_ushers</span> <span class="o">=</span> <span class="n">get_user_input</span><span class="p">()</span>
+
+    <span class="c1"># Run the simulation</span>
+    <span class="n">env</span> <span class="o">=</span> <span class="n">simpy</span><span class="o">.</span><span class="n">Environment</span><span class="p">()</span>
+    <span class="n">env</span><span class="o">.</span><span class="n">process</span><span class="p">(</span><span class="n">run_theater</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">num_cashiers</span><span class="p">,</span> <span class="n">num_servers</span><span class="p">,</span> <span class="n">num_ushers</span><span class="p">))</span>
+    <span class="n">env</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">until</span><span class="o">=</span><span class="mi">90</span><span class="p">)</span>
+
+    <span class="c1"># View the results</span>
+    <span class="n">mins</span><span class="p">,</span> <span class="n">secs</span> <span class="o">=</span> <span class="n">get_average_wait_time</span><span class="p">(</span><span class="n">wait_times</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span>
+        <span class="s2">&quot;Running simulation...&quot;</span><span class="p">,</span>
+        <span class="n">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">The average wait time is {mins} minutes and {secs} seconds.&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</pre></div>
     </div>
   </article>
     </div>
